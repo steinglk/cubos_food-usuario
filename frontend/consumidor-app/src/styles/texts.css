@@ -1,0 +1,28 @@
+.text-center{
+    text-align: center;
+}
+
+.light-label{
+    color: rgba(27, 26, 52, 0.67); 
+    font-size: 14px; 
+}
+
+.text-end{
+    justify-content: space-between;
+}
+
+
+.text-color-orange{
+    color: #D13201; 
+}
+
+.text-cadastro{
+    color: #DA803C;
+    font-size: 48px; 
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 48px;
+    letter-spacing: 0em;
+    margin-right: 20%;
+}

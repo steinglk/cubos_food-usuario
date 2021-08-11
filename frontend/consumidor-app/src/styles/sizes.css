@@ -1,0 +1,17 @@
+
+.vw {
+    width: 100vw;
+}
+
+.vh {
+    width: 100vh;
+}
+
+.header-size {
+    height: 248px;
+}
+
+.height-descricao {
+    min-height: 4rem;
+    margin: 0;
+}

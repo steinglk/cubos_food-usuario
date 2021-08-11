@@ -1,0 +1,47 @@
+.btn-orange{
+    background-color: #D13201;
+    border-radius: 20px;
+    padding: 11px 40px;
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 24px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.btn-white{
+    background-color: white;
+    border-radius: 20px;
+    padding: 11px 40px;
+    color: #D13201;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 24px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+
+.btn-cadastro{
+    width: 100px; 
+    height: 40px;
+    border-radius: 20px;
+}
+
+.btn-transparente{
+    color: #C9CCD1;
+    margin-right: 5px; 
+    background-color: white;
+    border: none;
+}
+
+.text-btn-anterior{
+    color: #D13201;
+}

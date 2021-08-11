@@ -1,0 +1,25 @@
+.background-cadastro{
+    background-color: white;
+    background-image: url('../assets/bg-cadastro.png');
+    background-repeat: no-repeat;
+    background-position: 100%;
+    background-size: 75%;
+  }
+
+.img-absolute{
+    position: absolute; 
+    width: 50%; 
+    height: 50%; 
+    object-fit: cover; 
+    margin-left: 50%; 
+    object-position: 100% 0%; 
+    margin-top: 1%; 
+}
+
+.background-produtos{
+  border-radius: 0px 0px 100px 0px;
+  height: 150px;
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-position: center;
+}
