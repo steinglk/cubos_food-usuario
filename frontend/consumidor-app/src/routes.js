@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom';
 
 import Login from './pages/Login';
-import Cadastro from './pages/Cadastro';
-import Dashboard from './pages/Dashboard';
+/* import Cadastro from './pages/Cadastro'; */
+/* import Dashboard from './pages/Dashboard'; */
 
 export const AuthContext = createContext();
 
@@ -37,14 +37,13 @@ function Routes() {
             <Router>
                 <Switch>
                     <Route path="/" exact component={Login} />
-                    <Route path="/cadastro" component={Cadastro} />
+                    {/* <Route path="/cadastro" component={Cadastro} /> */}
                     <RotasProtegidas>
-                        <Route path="/produtos" component={Dashboard}/>
+                        {/* <Route path="/produtos" component={Dashboard}/> */}
                     </RotasProtegidas>
                 </Switch>
             </Router>
         </AuthContext.Provider>
-
     );
 }
 
