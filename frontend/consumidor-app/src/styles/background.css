@@ -1,6 +1,5 @@
 .background-cadastro{
     background-color: white;
-    background-image: url('../assets/bg-cadastro.png');
     background-repeat: no-repeat;
     background-position: 100%;
     background-size: 75%;
@@ -23,3 +22,10 @@
   background-size: cover;
   background-position: center;
 }
+
+.bg-perfil{
+  background-image: url(  '../assets/bg-login.svg');
+  background-repeat: no-repeat;
+  background-position: 100%;
+}
+
