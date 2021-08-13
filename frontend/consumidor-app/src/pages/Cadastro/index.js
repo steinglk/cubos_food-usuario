@@ -16,7 +16,8 @@ import {AuthContext} from '../../routes';
 
 
 function Cadastro() {
-    const [olhoSenha, setOlhoSenha] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [confirmShowPassword, setConfirmShowPassword] = useState(false);
     const {register, handleSubmit} = useForm();
     const {logar} = useContext(AuthContext);
     const history = useHistory();
@@ -67,14 +68,29 @@ function Cadastro() {
                 <div className='h1-login flex-row space-between'>
                     <h1 className="cadastro-h1" >Cadastro</h1>
                 </div>
-                <div className='flex-column '>
-                    <label htmlFor='nome' className='label-nome'>Nome de usuario</label>
+                <div className='flex-column mt'>
+                    <label htmlFor='nome' className='label-cad'>Nome de usuario</label>
                     <input className='input-cadastro' id='nome' type='text' {... register('nome')}/>
                 </div>
-                <div className='flex-column '>
-                    <label htmlFor='email' className='label-email-cad'>email de usuario</label>
+                <div className='flex-column mt'>
+                    <label htmlFor='email' className='label-cad'>Email</label>
                     <input className='input-cadastro' id='email' type='email' {... register('email')}/>
                 </div>
+                <div className='flex-column mt'>
+                    <label htmlFor='Telefone' className='label-cad'>Telefone</label>
+                    <input className='input-cadastro' id='Telefone' type='Telefone' {... register('email')}/>
+                </div>
+                    <div className="flex-column input-password">
+                        <label htmlFor="senha">Senha</label>
+                        <input className="input-cadastro"
+                            type={showPassword ? 'text' : 'password'}
+                            name="senha"
+                            {...register('senha')}
+                        />
+                        <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} className="eye-password"
+                            size="lg"
+                            onClick={() => setShowPassword(!showPassword)} />
+                    </div>
                 </form>
             </div>
         </div>
