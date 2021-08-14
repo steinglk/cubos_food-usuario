@@ -1,0 +1,156 @@
+body{
+    overflow: auto;
+}
+
+.container-background{
+    justify-content: space-around;
+    align-items: flex-end;
+    color: white;
+    box-sizing: border-box;
+    background-image: url(../../assets/bg-restaurante.svg);
+}
+
+.container-background p{
+    cursor: pointer;
+    color:rgba(255, 255, 255, 1);
+}
+
+.conteiner-perfil{
+    position: absolute;
+}
+
+.imagem-perfil{
+    border-radius: 50%;
+    position: relative;
+    border: 6px solid #FFFFFF;
+    position: relative;
+    bottom: 85px;
+    background-position: center;
+    background-size: cover;
+    max-width: 180px;
+    min-width: 180px;
+    max-height: 180px;
+    min-height: 180px;
+}
+
+.conteiner-corpo{
+    height: 80vh;
+    color: rgba(82, 84, 89, 1);
+}
+
+.conteiner-corpo p{
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.container-button-has-item{
+    position: absolute;
+}
+
+.button-has-item{
+    position: relative;
+    left: 60vw;
+}
+
+.container-itens{
+    display: grid;
+    gap: 40px 32px;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    padding: 112px;
+    max-height: min-content;
+    overflow-y: auto;
+    
+}
+
+.container-card{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 6px rgba(50, 50, 50, 0.24);
+    border-radius: 24px;
+    padding: 10px 32px 20px 32px;
+    height: auto;
+    overflow-y: auto;
+    justify-content: space-around;
+
+}
+
+.texto-card{
+    display: flex;
+    width: 60%;
+    text-align: justify;
+    margin: 0 20px 0 0;
+}
+
+.imagem-card{
+    border: 2px solid rgba(251, 59, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 16px;
+    max-width: 180px;
+    min-width: 180px;
+    max-height: 180px;
+    min-height: 180px;
+    
+}
+
+.div-imagem-card{
+    margin-right: 10%;
+    margin-top: 4%;
+}
+
+.estilo-p{
+    color: rgba(34, 34, 34, 0,87);
+    font-size: 16px;
+}
+
+.estilo-span{
+    color: rgba(0, 99, 53, 1);
+    background: linear-gradient(0deg, rgba(13, 138, 79, 0.1), rgba(13, 138, 79, 0.1)),
+linear-gradient(0deg, #FFFFFF, #FFFFFF);
+    font-size: 14px;
+}
+
+.div-card {
+    width: 41vw;
+    height: 238px;
+    margin: 10px 32px 20px 32px;;
+    box-shadow: 0px 4px 6px rgba(50, 50, 50, 0.24);
+    border-radius: 24px;
+    background: #FFFFFF;
+}
+
+.card-content {
+    height: 100%;
+    width: 100%;
+    padding: 10px 32px 20px 32px;
+    border-radius: 24px;
+}
+
+.modal-hover {
+    display: none;
+    margin: 0;
+    width: 41vw;
+    height: 238px;
+    padding: 10px 32px 20px 32px;
+    border-radius: 24px;
+    background-color: rgba(255, 255, 255, 0.739);
+}
+
+.modal-hover button {
+    max-height: min-content;  
+    max-width: 50%;  
+    margin: 0 auto;
+}
+
+.bg-transparent {
+    background-color: rgba(0, 0,0, 0);
+}
+
+.busca{
+    background: #F5F5F5;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    width: 25%;
+    margin-right: 15%;
+    margin-top: 3%;
+    outline: none;
+}

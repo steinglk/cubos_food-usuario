@@ -8,7 +8,7 @@ import {
 
 import Login from './pages/Login';
 /* import Cadastro from './pages/Cadastro'; */
-/* import Dashboard from './pages/Dashboard'; */
+import Restaurantes from './pages/Restaurantes'
 
 export const AuthContext = createContext();
 
@@ -39,7 +39,7 @@ function Routes() {
                     <Route path="/" exact component={Login} />
                     {/* <Route path="/cadastro" component={Cadastro} /> */}
                     <RotasProtegidas>
-                        {/* <Route path="/produtos" component={Dashboard}/> */}
+                        <Route path="/restaurantes" component={Restaurantes}/>
                     </RotasProtegidas>
                 </Switch>
             </Router>

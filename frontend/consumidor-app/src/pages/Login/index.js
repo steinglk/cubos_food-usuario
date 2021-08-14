@@ -19,6 +19,7 @@ function Login() {
     const history = useHistory();
 
     async function onSubmit(data) {
+        console.log(data)
         if (!data.email || !data.senha) {
             toast.error('E-mail e senha são obrigatórios!', {
                 position: "top-right",
@@ -32,7 +33,7 @@ function Login() {
             return;
         }
 
-        const resposta = await fetch('http://localhost:8000/', {
+        const resposta = await fetch('http://localhost:5000/', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
