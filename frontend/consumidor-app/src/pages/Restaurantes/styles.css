@@ -89,6 +89,12 @@ body{
     min-width: 180px;
     max-height: 180px;
     min-height: 180px;
+    
+}
+
+.div-imagem-card{
+    margin-right: 10%;
+    margin-top: 4%;
 }
 
 .estilo-p{
@@ -139,3 +145,12 @@ linear-gradient(0deg, #FFFFFF, #FFFFFF);
     background-color: rgba(0, 0,0, 0);
 }
 
+.busca{
+    background: #F5F5F5;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    width: 25%;
+    margin-right: 15%;
+    margin-top: 3%;
+    outline: none;
+}

@@ -38,8 +38,8 @@ function Routes() {
                 <Switch>
                     <Route path="/" exact component={Login} />
                     {/* <Route path="/cadastro" component={Cadastro} /> */}
-                        <Route path="/restaurantes" component={Restaurantes}/>
                     <RotasProtegidas>
+                        <Route path="/restaurantes" component={Restaurantes}/>
                     </RotasProtegidas>
                 </Switch>
             </Router>
