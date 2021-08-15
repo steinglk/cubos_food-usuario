@@ -16,7 +16,7 @@ import {AuthContext} from '../../routes';
 
 
 function Cadastro() {
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState({senha: false, confirmarSenha: false});
     const {register, handleSubmit} = useForm();
     const history = useHistory();
 
@@ -123,12 +123,12 @@ function Cadastro() {
                             className="input-cadastro input-relative"
                             name="senha"
                             {...register('senha')}
-                            type={showPassword ? 'text' : 'password'} 
+                            type={showPassword.senha ? 'text' : 'password'} 
                         />
                         <FontAwesomeIcon 
-                            icon={showPassword ? faEye : faEyeSlash} className="eye-password"
+                            icon={showPassword.senha ? faEye : faEyeSlash} className="eye-password"
                             size="lg"
-                            onClick={() => setShowPassword(!showPassword)}
+                            onClick={() => setShowPassword({senha: !showPassword.senha})}
                         />
                     </div>
 
@@ -138,12 +138,12 @@ function Cadastro() {
                             className="input-cadastro input-relative"
                             name="confirmarSenha"
                             {...register('confirmarSenha')}
-                            type={showPassword ? 'text' : 'password'} 
+                            type={showPassword.confirmarSenha ? 'text' : 'password'} 
                         />
                         <FontAwesomeIcon 
-                            icon={showPassword ? faEye : faEyeSlash} className="eye-password"
+                            icon={showPassword.confirmarSenha ? faEye : faEyeSlash} className="eye-password"
                             size="lg"
-                            onClick={() => setShowPassword(!showPassword)}
+                            onClick={() => setShowPassword({confirmarSenha: !showPassword.confirmarSenha})}
                         />
                     </div>
 
@@ -154,17 +154,6 @@ function Cadastro() {
                         <span className="span-login">Já tem uma conta?</span>
                         <Link to='/cadastro' className='link-login'>Login</Link>
                     </div>
-
-                        {/* <label htmlFor="senha">Senha</label>
-                        <input className="input-cadastro"
-                            type={showPassword ? 'text' : 'password'}
-                            name="senha"
-                            {...register('senha')}
-                        />
-                        <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} className="eye-password"
-                            size="lg"
-                            onClick={() => setShowPassword(!showPassword)} /> */}
-                    
                 </form>
             </div>
         </div>
