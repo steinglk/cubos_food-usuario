@@ -11,6 +11,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import {toast} from 'react-toastify';
 import {AuthContext} from '../../routes';
+import toastConfig from '../../tools/toastConfig';
 
 function Login() {
     const [olhoSenha, setOlhoSenha] = useState(false);
@@ -20,15 +21,7 @@ function Login() {
 
     async function onSubmit(data) {
         if (!data.email || !data.senha) {
-            toast.error('E-mail e senha são obrigatórios!', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
-            });
+            toast.error('E-mail e senha são obrigatórios!', toastConfig);
             return;
         }
 
@@ -43,15 +36,7 @@ function Login() {
         const {token} = await resposta.json();
 
         if (!token) {
-            toast.error('E-mail e/ou senha incorretos!', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
-            });
+            toast.error('E-mail e/ou senha incorretos!', toastConfig);
             return;
         }
 

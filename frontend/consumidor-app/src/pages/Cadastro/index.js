@@ -13,6 +13,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import {toast} from 'react-toastify';
 import {AuthContext} from '../../routes';
+import toastConfig from '../../tools/toastConfig';
 
 
 function Cadastro() {
@@ -22,28 +23,12 @@ function Cadastro() {
 
     async function onSubmit(data) {
         if (!data.email || !data.senha || !data.telefone || !data.senha || !data.confirmarSenha) {
-            toast.error('Todos os campos são obrigatórios!', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
-            });
+            toast.error('Todos os campos são obrigatórios!', toastConfig);
             return;
         }
 
         if (data.senha !== data.confirmarSenha) {
-            toast.error('As senhas não correspodem.', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
-            });
+            toast.error('As senhas não correspodem.', toastConfig);
             return;
         }
 
@@ -58,28 +43,12 @@ function Cadastro() {
         const retorno = await resposta.json();
         
         if (retorno === "Email já cadastrado"){
-            toast.error('E-mail já cadastrado.', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
-            });
+            toast.error('E-mail já cadastrado.', toastConfig);
             return;
         }
 
         if (retorno === "Cadastro realizado com sucesso"){
-            toast.success('Cadastro realizado com sucesso!.', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
-            });
+            toast.success('Cadastro realizado com sucesso!.', toastConfig);
         }
 
         history.push('/');
