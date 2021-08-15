@@ -6,8 +6,6 @@ const senhaHash = require('../../segredo_token');
 const logarCliente = async (req, res) => {
     const { email, senha } = req.body;
 
-    console.log(req.body)
-
     if (!email || !senha) {
         return res.status(404).json('E-mail e senha são obrigatórios');
     }

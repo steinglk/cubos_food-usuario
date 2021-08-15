@@ -19,7 +19,6 @@ function Login() {
     const history = useHistory();
 
     async function onSubmit(data) {
-        console.log(data)
         if (!data.email || !data.senha) {
             toast.error('E-mail e senha são obrigatórios!', {
                 position: "top-right",
