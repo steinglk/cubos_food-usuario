@@ -30,6 +30,7 @@
     top: 0;
     bottom: 0;
     z-index: 5;
+    height: min-content;
 }
 
 .logo-posicao {
@@ -84,4 +85,15 @@
 
 .label-cad {
     margin-left: 6rem;
+}
+
+.input-password{
+    position: relative;
+}
+
+.eye-password{
+    position: absolute;
+    top: 48%;
+    right: 17%;
+    cursor: pointer;
 }
