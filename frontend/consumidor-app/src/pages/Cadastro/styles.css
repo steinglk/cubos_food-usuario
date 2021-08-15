@@ -30,18 +30,19 @@
     top: 0;
     bottom: 0;
     z-index: 5;
+    height: min-content;
 }
 
 .logo-posicao {
     position: absolute;
     z-index: 2;
-    margin-top: 100px;
+    margin-top: 70px;
     margin-left: 100px;
 }
 .barril-pos {
     position: absolute;
     z-index: 1;
-    margin-top: 135px;
+    margin-top: 105px;
     margin-left: 110px;
 }
 
@@ -74,7 +75,7 @@
     font-size: 16px;
     font-weight: 400;
     margin: 1rem auto;
-    width: 80%;
+    width: 70%;
     height: 30px;
     border-radius: 10px;
     border: 2px solid rgba(27, 26, 42, 0.29);
@@ -83,5 +84,16 @@
 }
 
 .label-cad {
-    margin-left: 14rem;
+    margin-left: 6rem;
+}
+
+.input-password{
+    position: relative;
+}
+
+.eye-password{
+    position: absolute;
+    top: 48%;
+    right: 17%;
+    cursor: pointer;
 }

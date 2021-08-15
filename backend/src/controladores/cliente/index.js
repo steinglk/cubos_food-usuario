@@ -8,7 +8,7 @@ const cadastrarCliente = async (req, res) => {
         senha,
         telefone,
     } = req.body;
-    console.log(req.body)
+
     if(!nome.trim() || !email.trim() || !senha.trim() || !telefone.trim()) {
         return res.status(400).json("Todos os campos são obrigatórios");
     }

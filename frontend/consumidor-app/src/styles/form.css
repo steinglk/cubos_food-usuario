@@ -13,12 +13,12 @@
     justify-content: center;
     background-color: white;
     padding: 45px 61px;  
-    width: 50%;
+    width: 40%;
     border-bottom-right-radius: 15%;
     position: relative; 
 }
 
-.form{
+.form-class{
     display: flex;
     flex-direction: column;
     background-color: white;

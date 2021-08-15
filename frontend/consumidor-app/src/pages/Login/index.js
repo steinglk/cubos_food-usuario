@@ -19,7 +19,6 @@ function Login() {
     const history = useHistory();
 
     async function onSubmit(data) {
-        console.log(data)
         if (!data.email || !data.senha) {
             toast.error('E-mail e senha são obrigatórios!', {
                 position: "top-right",
@@ -33,7 +32,7 @@ function Login() {
             return;
         }
 
-        const resposta = await fetch('http://localhost:5000/', {
+        const resposta = await fetch('http://localhost:8000/', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -72,7 +71,7 @@ function Login() {
         <div className='container-login bg-perfil'>
             <div className='container-form'>
                 <img src={detalhe} className='size'/>
-                <form className='form-login form' onSubmit={handleSubmit(onSubmit)}>
+                <form className='form-login form-class' onSubmit={handleSubmit(onSubmit)}>
                     <div className='h1-login flex-row space-between'>
                         <h1>Login</h1>
                         <img src={logo}/>

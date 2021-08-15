@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import Login from './pages/Login';
-/* import Cadastro from './pages/Cadastro'; */
+import Cadastro from './pages/Cadastro';
 import Restaurantes from './pages/Restaurantes'
 
 export const AuthContext = createContext();
@@ -16,7 +16,7 @@ function RotasProtegidas(props) {
     const { token } = useContext(AuthContext);
 
     return(
-        <Route render={() => (localStorage.getItem('@restaurante/token') ? props.children : <Redirect to='/' />)} />
+        <Route render={() => (localStorage.getItem('@usuario/token') ? props.children : <Redirect to='/' />)} />
     )
 }
 
@@ -25,7 +25,6 @@ function Routes() {
 
     function logar(tokenLogar) {
         setToken(tokenLogar);
-        
     }
 
     function deslogar() {
@@ -37,7 +36,7 @@ function Routes() {
             <Router>
                 <Switch>
                     <Route path="/" exact component={Login} />
-                    {/* <Route path="/cadastro" component={Cadastro} /> */}
+                    <Route path="/cadastro" component={Cadastro} />
                     <RotasProtegidas>
                         <Route path="/restaurantes" component={Restaurantes}/>
                     </RotasProtegidas>

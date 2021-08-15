@@ -15,7 +15,7 @@ function Restaurantes() {
     const [filtro, setFiltro] = useState('')
 
     async function carregarRestaurante() {
-        const resposta = await fetch('http://localhost:5000/restaurantes', {
+        const resposta = await fetch('http://localhost:8000/restaurantes', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
@@ -31,7 +31,7 @@ function Restaurantes() {
         carregarRestaurante();
 
         async function carregarHeader() {
-            const resposta = await fetch('http://localhost:5000/header', {
+            const resposta = await fetch('http://localhost:8000/header', {
                 method: 'GET',
                 headers:{
                     'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
@@ -62,7 +62,7 @@ function Restaurantes() {
     }
 
     function handleFilter(restaurante) {
-        if (restaurante.nome.includes(filtro)) return restaurante
+        if (restaurante.nome.toLowerCase().includes(filtro.toLowerCase())) return restaurante
     }
     
     return (
