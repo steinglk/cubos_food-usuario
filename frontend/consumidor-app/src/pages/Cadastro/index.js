@@ -17,7 +17,7 @@ import toastConfig from '../../tools/toastConfig';
 
 
 function Cadastro() {
-    const [showPassword, setShowPassword] = useState({senha: false, confirmarSenha: false});
+    const [showPassword, setShowPassword] = useState(false);
     const {register, handleSubmit} = useForm();
     const history = useHistory();
 
@@ -70,7 +70,7 @@ function Cadastro() {
 
             <div className='cadastro-form-container'>
                 <form className='form-cadastro' onSubmit={handleSubmit(onSubmit)}>
-                <div className='h1-login flex-row space-between'>
+                <div className='flex-row space-between'>
                     <h1 className="cadastro-h1" >Cadastro</h1>
                 </div>
                 <div className='flex-column mt'>
@@ -92,12 +92,12 @@ function Cadastro() {
                             className="input-cadastro input-relative"
                             name="senha"
                             {...register('senha')}
-                            type={showPassword.senha ? 'text' : 'password'} 
+                            type={showPassword ? 'text' : 'password'} 
                         />
                         <FontAwesomeIcon 
-                            icon={showPassword.senha ? faEye : faEyeSlash} className="eye-password"
+                            icon={showPassword ? faEye : faEyeSlash} className="eye-password"
                             size="lg"
-                            onClick={() => setShowPassword({senha: !showPassword.senha})}
+                            onClick={() => setShowPassword(!showPassword)}
                         />
                     </div>
 
@@ -107,20 +107,20 @@ function Cadastro() {
                             className="input-cadastro input-relative"
                             name="confirmarSenha"
                             {...register('confirmarSenha')}
-                            type={showPassword.confirmarSenha ? 'text' : 'password'} 
+                            type={showPassword ? 'text' : 'password'} 
                         />
                         <FontAwesomeIcon 
-                            icon={showPassword.confirmarSenha ? faEye : faEyeSlash} className="eye-password"
+                            icon={showPassword ? faEye : faEyeSlash} className="eye-password"
                             size="lg"
-                            onClick={() => setShowPassword({confirmarSenha: !showPassword.confirmarSenha})}
+                            onClick={() => setShowPassword(!showPassword)}
                         />
                     </div>
 
                     <div className='flex-row content-center'>
                         <button className='btn-orange button-margin mt'type='submit' >Criar conta</button>
                     </div>
-                    <div className='text-center'>
-                        <span className="span-login">Já tem uma conta?</span>
+                    <div className='text-center mb-lg'>
+                        <span className="span-cadastro">Já tem uma conta?</span>
                         <Link to='/cadastro' className='link-login'>Login</Link>
                     </div>
                 </form>

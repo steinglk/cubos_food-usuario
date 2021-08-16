@@ -89,7 +89,7 @@ function Restaurantes() {
 
                     <div className="flex-row content-center items-center">
                     <div className='container-itens'>
-                        {restaurantes.filter(handleFilter).map(restaurante =>(
+                        {restaurantes || filtro.length > 0 ? restaurantes.filter(handleFilter).map(restaurante => (
                         <div className="div-card">
                             <div className="card-content flex-row">
                             <div className='flex-column texto-card'>
@@ -110,7 +110,11 @@ function Restaurantes() {
                             </div>
                             </div>
                         </div>
-                        ))}
+                        )) : (
+                            <div className="items-center content-center">
+                                <p>Nenhum produto encontrado</p>
+                            </div>
+                        )}
                     </div>
                     </div>
                 </div>   

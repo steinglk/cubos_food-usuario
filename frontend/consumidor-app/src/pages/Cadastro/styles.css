@@ -60,21 +60,21 @@
 }
 
 .cadastro-h1 {
-    font-family:'Baloo';
+    font-family:'Baloo 2', cursive;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 600;
     font-size: 32px;
     line-height: 150%;
     margin-top: 2rem;
-    margin-left: 2rem;
-    margin-right: auto;
+    margin: 50px 0 0 100px;
+    color: #D13201;
 }
 
 .input-cadastro {
     margin-bottom: 24px;
     font-size: 16px;
     font-weight: 400;
-    margin: 1rem auto;
+    margin: 1rem auto 0 auto;
     width: 70%;
     height: 30px;
     border-radius: 10px;
@@ -85,6 +85,12 @@
 
 .label-cad {
     margin-left: 6rem;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;  
+    color: #393C40;
 }
 
 .input-password{
@@ -96,4 +102,9 @@
     top: 48%;
     right: 17%;
     cursor: pointer;
+}
+
+.span-cadastro {
+    color: rgba(111, 115, 119, 1);
+    margin: 10px;
 }
