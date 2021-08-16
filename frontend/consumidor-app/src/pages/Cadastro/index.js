@@ -32,7 +32,7 @@ function Cadastro() {
             return;
         }
 
-        const resposta = await fetch('http://localhost:8000/cadastro', {
+        const resposta = await fetch('http://localhost:8001/cadastro', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -56,8 +56,6 @@ function Cadastro() {
 
     return (
         <div className='container-cadastro'>
-            <div >
-                
                 <div className="logo-area flex-column">
                     <img className="logo-posicao" src={logo} />
                     <img className="barril-pos" src={barril}/>
@@ -66,7 +64,7 @@ function Cadastro() {
                     <img src={centroImg} />
                 </div>
                 <img className="fundo-cadastro" src={detalhe} /> 
-            </div>
+           
 
             <div className='cadastro-form-container'>
                 <form className='form-cadastro' onSubmit={handleSubmit(onSubmit)}>
@@ -92,12 +90,12 @@ function Cadastro() {
                             className="input-cadastro input-relative"
                             name="senha"
                             {...register('senha')}
-                            type={showPassword.senha ? 'text' : 'password'} 
+                            type={showPassword ? 'text' : 'password'} 
                         />
                         <FontAwesomeIcon 
-                            icon={showPassword.senha ? faEye : faEyeSlash} className="eye-password"
+                            icon={showPassword ? faEye : faEyeSlash} className="eye-password"
                             size="lg"
-                            onClick={() => setShowPassword({senha: !showPassword.senha})}
+                            onClick={() => setShowPassword(!showPassword)}
                         />
                     </div>
 
@@ -107,12 +105,12 @@ function Cadastro() {
                             className="input-cadastro input-relative"
                             name="confirmarSenha"
                             {...register('confirmarSenha')}
-                            type={showPassword.confirmarSenha ? 'text' : 'password'} 
+                            type={showPassword ? 'text' : 'password'} 
                         />
                         <FontAwesomeIcon 
-                            icon={showPassword.confirmarSenha ? faEye : faEyeSlash} className="eye-password"
+                            icon={showPassword ? faEye : faEyeSlash} className="eye-password"
                             size="lg"
-                            onClick={() => setShowPassword({confirmarSenha: !showPassword.confirmarSenha})}
+                            onClick={() => setShowPassword(!showPassword)}
                         />
                     </div>
 

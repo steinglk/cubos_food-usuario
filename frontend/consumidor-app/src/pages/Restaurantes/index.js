@@ -16,7 +16,7 @@ function Restaurantes() {
     const [existe, setExiste] = useState(true)
 
     async function carregarRestaurante() {
-        const resposta = await fetch('http://localhost:8000/restaurantes', {
+        const resposta = await fetch('http://localhost:8001/restaurantes', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
@@ -32,7 +32,7 @@ function Restaurantes() {
         carregarRestaurante();
 
         async function carregarHeader() {
-            const resposta = await fetch('http://localhost:8000/header', {
+            const resposta = await fetch('http://localhost:8001/header', {
                 method: 'GET',
                 headers:{
                     'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
