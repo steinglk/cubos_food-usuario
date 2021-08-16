@@ -118,7 +118,9 @@ function Restaurantes() {
                             </div>
                         )) 
                         } 
-                        {restaurantes.filter(handleFilter).length ? ''  : (<h1>Restaurante não encontrado</h1>)}
+                        {restaurantes.filter(handleFilter).length ? ''  : (
+                            <div className="h1-vazio"><h1>Nenhum restaurante encontrado</h1></div>
+                            )}
                     </div>
                     </div>
                 </div>   

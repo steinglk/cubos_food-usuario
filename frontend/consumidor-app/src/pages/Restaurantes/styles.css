@@ -154,3 +154,10 @@ linear-gradient(0deg, #FFFFFF, #FFFFFF);
     margin-top: 3%;
     outline: none;
 }
+
+.h1-vazio {
+    position: absolute;
+    right: 40%;
+   color: #525459;
+   font-family: Montserrat;
+}
