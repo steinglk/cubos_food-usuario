@@ -13,6 +13,7 @@ function Restaurantes() {
     const [abrirPerfil, setAbrirPerfil] = useState(false);
     const [perfil, setPerfil] = useState('');
     const [filtro, setFiltro] = useState('')
+    const [existe, setExiste] = useState(true)
 
     async function carregarRestaurante() {
         const resposta = await fetch('http://localhost:8000/restaurantes', {
@@ -62,7 +63,11 @@ function Restaurantes() {
     }
 
     function handleFilter(restaurante) {
-        if (restaurante.nome.toLowerCase().includes(filtro.toLowerCase())) return restaurante
+        if (restaurante.nome.toLowerCase().includes(filtro.toLowerCase())) {
+            return restaurante
+        }
+
+        return false
     }
     
     return (
@@ -89,28 +94,31 @@ function Restaurantes() {
 
                     <div className="flex-row content-center items-center">
                     <div className='container-itens'>
+                        
                         {restaurantes.filter(handleFilter).map(restaurante =>(
-                        <div className="div-card">
-                            <div className="card-content flex-row">
-                            <div className='flex-column texto-card'>
-                                <div>
-                                    <h4>{restaurante.nome}</h4>
-                                </div>
-                                <div className='estilo-p'>
-                                    <p>{restaurante.descricao}</p>
-                                </div>
-                                <div>
-                                    <span className='estilo-span'>$$$</span>
+                                <div className="div-card">
+                                <div className="card-content flex-row">
+                                    <div className='flex-column texto-card'>
+                                        <div>
+                                            <h4>{restaurante.nome}</h4>
+                                        </div>
+                                        <div className='estilo-p'>
+                                            <p>{restaurante.descricao}</p>
+                                        </div>
+                                        <div>
+                                            <span className='estilo-span'>$$$</span>
+                                        </div>
+                                    </div>
+                                    <div className='div-imagem-card'>
+                                        <div > 
+                                            <img src={restaurante.imagem_restaurante} alt="imagem do produto" className='imagem-card' />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='div-imagem-card'>
-                                <div > 
-                                    <img src={restaurante.imagem_restaurante} alt="imagem do produto" className='imagem-card' />
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        ))}
+                        )) 
+                        } 
+                        {restaurantes.filter(handleFilter).length ? ''  : (<h1>Restaurante não encontrado</h1>)}
                     </div>
                     </div>
                 </div>   
