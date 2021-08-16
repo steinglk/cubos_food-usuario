@@ -119,9 +119,9 @@ function Cadastro() {
                     <div className='flex-row content-center'>
                         <button className='btn-orange button-margin mt'type='submit' >Criar conta</button>
                     </div>
-                    <div className='text-center'>
-                        <span className="span-login">Já tem uma conta?</span>
-                        <Link to='/cadastro' className='link-login'>Login</Link>
+                    <div className='text-center mb-lg'>
+                        <span className="span-cadastro">Já tem uma conta?</span>
+                        <Link to='/' className='link-login'>Login</Link>
                     </div>
                 </form>
             </div>

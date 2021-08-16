@@ -60,9 +60,9 @@
 }
 
 .cadastro-h1 {
-    font-family:'Baloo';
+    font-family:'Baloo 2';
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 32px;
     line-height: 150%;
     margin-top: 2rem;
@@ -96,4 +96,8 @@
     top: 48%;
     right: 17%;
     cursor: pointer;
+}
+
+.span-cadastro {
+    color: rgba(111, 115, 119, 1);
 }
