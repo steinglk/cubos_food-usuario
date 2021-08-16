@@ -13,37 +13,22 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import {toast} from 'react-toastify';
 import {AuthContext} from '../../routes';
+import toastConfig from '../../tools/toastConfig';
 
 
 function Cadastro() {
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState({senha: false, confirmarSenha: false});
     const {register, handleSubmit} = useForm();
     const history = useHistory();
 
     async function onSubmit(data) {
         if (!data.email || !data.senha || !data.telefone || !data.senha || !data.confirmarSenha) {
-            toast.error('Todos os campos são obrigatórios!', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
-            });
+            toast.error('Todos os campos são obrigatórios!', toastConfig);
             return;
         }
 
         if (data.senha !== data.confirmarSenha) {
-            toast.error('As senhas não correspodem.', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
-            });
+            toast.error('As senhas não correspodem.', toastConfig);
             return;
         }
 
@@ -58,28 +43,12 @@ function Cadastro() {
         const retorno = await resposta.json();
         
         if (retorno === "Email já cadastrado"){
-            toast.error('E-mail já cadastrado.', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
-            });
+            toast.error('E-mail já cadastrado.', toastConfig);
             return;
         }
 
         if (retorno === "Cadastro realizado com sucesso"){
-            toast.success('Cadastro realizado com sucesso!.', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
-            });
+            toast.success('Cadastro realizado com sucesso!.', toastConfig);
         }
 
         history.push('/');
@@ -123,12 +92,12 @@ function Cadastro() {
                             className="input-cadastro input-relative"
                             name="senha"
                             {...register('senha')}
-                            type={showPassword ? 'text' : 'password'} 
+                            type={showPassword.senha ? 'text' : 'password'} 
                         />
                         <FontAwesomeIcon 
-                            icon={showPassword ? faEye : faEyeSlash} className="eye-password"
+                            icon={showPassword.senha ? faEye : faEyeSlash} className="eye-password"
                             size="lg"
-                            onClick={() => setShowPassword(!showPassword)}
+                            onClick={() => setShowPassword({senha: !showPassword.senha})}
                         />
                     </div>
 
@@ -138,12 +107,12 @@ function Cadastro() {
                             className="input-cadastro input-relative"
                             name="confirmarSenha"
                             {...register('confirmarSenha')}
-                            type={showPassword ? 'text' : 'password'} 
+                            type={showPassword.confirmarSenha ? 'text' : 'password'} 
                         />
                         <FontAwesomeIcon 
-                            icon={showPassword ? faEye : faEyeSlash} className="eye-password"
+                            icon={showPassword.confirmarSenha ? faEye : faEyeSlash} className="eye-password"
                             size="lg"
-                            onClick={() => setShowPassword(!showPassword)}
+                            onClick={() => setShowPassword({confirmarSenha: !showPassword.confirmarSenha})}
                         />
                     </div>
 
@@ -154,17 +123,6 @@ function Cadastro() {
                         <span className="span-login">Já tem uma conta?</span>
                         <Link to='/cadastro' className='link-login'>Login</Link>
                     </div>
-
-                        {/* <label htmlFor="senha">Senha</label>
-                        <input className="input-cadastro"
-                            type={showPassword ? 'text' : 'password'}
-                            name="senha"
-                            {...register('senha')}
-                        />
-                        <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} className="eye-password"
-                            size="lg"
-                            onClick={() => setShowPassword(!showPassword)} /> */}
-                    
                 </form>
             </div>
         </div>
