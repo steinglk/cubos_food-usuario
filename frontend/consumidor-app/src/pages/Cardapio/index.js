@@ -15,7 +15,7 @@ function Cardapio() {
     const [perfil, setPerfil] = useState('');
     const [filtro, setFiltro] = useState('');
     const [existe, setExiste] = useState(true);
-    const {id} = useContext(AuthContext);
+    const { id } = useContext(AuthContext);
 
     async function carregarRestaurante() {
         const resposta = await fetch('http://localhost:8001/restaurantes', {

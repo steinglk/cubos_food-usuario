@@ -38,7 +38,7 @@ function Routes() {
     }
 
     return (
-        <AuthContext.Provider value={{ token, logar, deslogar, idRestaurante }}>
+        <AuthContext.Provider value={{ token, logar, deslogar, idRestaurante, id }}>
             <Router>
                 <Switch>
                     <Route path="/" exact component={Login} />
