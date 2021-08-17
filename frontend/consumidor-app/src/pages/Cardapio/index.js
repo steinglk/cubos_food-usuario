@@ -1,26 +1,19 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import './styles.css';
 import { useState } from 'react';
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import pizza from '../../assets/pizarria.png';
 import bg from '../../assets/bg-restaurante.svg';
-import {useHistory} from 'react-router-dom';
-import {AuthContext} from '../../routes';
 
-function Restaurantes() {
+
+function Cardapio() {
     const [restaurantes, setRestaurantes] = useState([]);
     const [header, setHeader] = useState('');
     const [nome, setNome] = useState('');
     const [abrirPerfil, setAbrirPerfil] = useState(false);
     const [perfil, setPerfil] = useState('');
-    const [filtro, setFiltro] = useState('');
-    const [existe, setExiste] = useState(true);
-    const history = useHistory();
-    const {id} = useContext(AuthContext);
-
-    function cardapio(id) {
-        history.push(`/restaurante/${id}`);
-    }
+    const [filtro, setFiltro] = useState('')
+    const [existe, setExiste] = useState(true)
 
     async function carregarRestaurante() {
         const resposta = await fetch('http://localhost:8001/restaurantes', {
@@ -81,7 +74,7 @@ function Restaurantes() {
         <div>
             <div className='flex-row background-produtos container-background' style={{backgroundImage: {bg}}}>
                 <h2>{nome}</h2>
-                <p onClick={() => handleLogout()} >Logout</p>
+                <p onClick={() => handleLogout()} >Sair</p>
             </div>
             <div className='conteiner-perfil'>
                 <img className='imagem-perfil img-absolute' 
@@ -99,11 +92,11 @@ function Restaurantes() {
                         />
                     </div>
 
-                    <div className="flex-row content-center items-center" >
+                    <div className="flex-row content-center items-center">
                     <div className='container-itens'>
                         
                         {restaurantes.filter(handleFilter).map(restaurante =>(
-                                <div className="div-card" onClick={() => cardapio(restaurante.id)}>
+                                <div className="div-card">
                                 <div className="card-content flex-row">
                                     <div className='flex-column texto-card'>
                                         <div>
@@ -136,4 +129,4 @@ function Restaurantes() {
     );
 }
 
-export default Restaurantes;
+export default Cardapio;
