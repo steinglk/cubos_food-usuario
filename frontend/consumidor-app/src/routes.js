@@ -14,8 +14,7 @@ import Cardapio from './pages/Cardapio';
 export const AuthContext = createContext();
 
 function RotasProtegidas(props) {
-    const { token, id } = useContext(AuthContext);
-
+    const { token } = useContext(AuthContext);
     return(
         <Route render={() => (localStorage.getItem('@usuario/token') ? props.children : <Redirect to='/' />)} />
     )
@@ -25,9 +24,9 @@ function Routes() {
     const [token, setToken] = useState('');
     const [id, setId] = useState('');
 
-    function idRestaurante(id) {
-        console.log(id)
-        setId(id);
+    function idRestaurante(idRes) {
+        console.log(`peguei o id: ${idRes}`)
+        setId(idRes);
     }
 
     function logar(tokenLogar) {

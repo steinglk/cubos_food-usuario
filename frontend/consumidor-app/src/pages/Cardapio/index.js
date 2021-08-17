@@ -1,9 +1,10 @@
 import React from 'react';
 import './styles.css';
 import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import pizza from '../../assets/pizarria.png';
 import bg from '../../assets/bg-restaurante.svg';
+import { AuthContext } from '../../routes';
 
 
 function Cardapio() {
@@ -12,8 +13,9 @@ function Cardapio() {
     const [nome, setNome] = useState('');
     const [abrirPerfil, setAbrirPerfil] = useState(false);
     const [perfil, setPerfil] = useState('');
-    const [filtro, setFiltro] = useState('')
-    const [existe, setExiste] = useState(true)
+    const [filtro, setFiltro] = useState('');
+    const [existe, setExiste] = useState(true);
+    const {id} = useContext(AuthContext);
 
     async function carregarRestaurante() {
         const resposta = await fetch('http://localhost:8001/restaurantes', {
@@ -26,6 +28,7 @@ function Cardapio() {
         const restaurantesRetornados = await resposta.json();
         console.log(restaurantesRetornados)
         setRestaurantes(restaurantesRetornados);
+        console.log(`ID chegou no cardapio: ${id}`)
     }
     useEffect(() => {
         
