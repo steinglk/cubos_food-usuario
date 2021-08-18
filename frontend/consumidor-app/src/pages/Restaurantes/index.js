@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useEffect, useContext } from 'react';
 import pizza from '../../assets/pizarria.png';
 import bg from '../../assets/bg-restaurante.svg';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../routes';
 
 function Restaurantes() {
@@ -19,7 +19,6 @@ function Restaurantes() {
     const { idRestaurante } = useContext(AuthContext);
 
     function cardapio(id) {
-        idRestaurante(id);
         history.push(`/restaurante/${id}`);
     }
 
@@ -74,7 +73,6 @@ function Restaurantes() {
         if (restaurante.nome.toLowerCase().includes(filtro.toLowerCase())) {
             return restaurante
         }
-
         return false
     }
     

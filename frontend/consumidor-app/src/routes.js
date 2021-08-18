@@ -22,12 +22,6 @@ function RotasProtegidas(props) {
 
 function Routes() {
     const [token, setToken] = useState('');
-    const [id, setId] = useState('');
-
-    function idRestaurante(idRes) {
-        console.log(`peguei o id: ${idRes}`)
-        setId(idRes);
-    }
 
     function logar(tokenLogar) {
         setToken(tokenLogar);
@@ -38,14 +32,14 @@ function Routes() {
     }
 
     return (
-        <AuthContext.Provider value={{ token, logar, deslogar, idRestaurante, id }}>
+        <AuthContext.Provider value={{ token, logar, deslogar }}>
             <Router>
                 <Switch>
                     <Route path="/" exact component={Login} />
                     <Route path="/cadastro" component={Cadastro} />
                     <RotasProtegidas>
                         <Route path="/restaurantes" exact component={Restaurantes}/>
-                        <Route path= {`/restaurante/${id}`} exact component={Cardapio}/>
+                        <Route path= "/restaurante/:id" exact component={Cardapio}/>
                     </RotasProtegidas>
                 </Switch>
             </Router>
