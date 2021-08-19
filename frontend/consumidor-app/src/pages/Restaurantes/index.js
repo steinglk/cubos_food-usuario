@@ -62,7 +62,10 @@ function Restaurantes() {
     }
 
     function handleFilter(restaurante) {
-        if (restaurante.nome.toLowerCase().includes(filtro.toLowerCase())) return restaurante
+        if (restaurante.nome.toLowerCase().includes(filtro.toLowerCase())) {
+            
+            return restaurante
+        }
     }
     
     return (
@@ -89,7 +92,7 @@ function Restaurantes() {
 
                     <div className="flex-row content-center items-center">
                     <div className='container-itens'>
-                        {restaurantes || filtro.length > 0 ? restaurantes.filter(handleFilter).map(restaurante => (
+                        {filtro !== -1 ? (restaurantes.filter(handleFilter).map(restaurante => (
                         <div className="div-card">
                             <div className="card-content flex-row">
                             <div className='flex-column texto-card'>
@@ -110,7 +113,7 @@ function Restaurantes() {
                             </div>
                             </div>
                         </div>
-                        )) : (
+                        ))) : (
                             <div className="items-center content-center">
                                 <p>Nenhum produto encontrado</p>
                             </div>

@@ -121,7 +121,7 @@ function Cadastro() {
                     </div>
                     <div className='text-center mb-lg'>
                         <span className="span-cadastro">Já tem uma conta?</span>
-                        <Link to='/cadastro' className='link-login'>Login</Link>
+                        <Link to='/' className='link-login'>Login</Link>
                     </div>
                 </form>
             </div>
