@@ -1,0 +1,49 @@
+
+
+.img-modal {
+    width: inherit;
+    min-height: 200px;
+    max-height: 250px;
+    background-color: black;
+    border-radius: 15px 15px 0 0;
+}
+
+.imagem-produtos{
+    border-radius: 50%;
+    position: relative;
+    border: 6px solid #FFFFFF;
+    position: relative;
+    bottom: 85px;
+    left: 4rem;
+    background-position: center;
+    background-size: cover;
+    width:119px;
+    height:119px;
+}
+
+.area-dados {
+    position: relative;
+    padding: 1rem;
+    width: 100%;
+    height: 80%;
+    bottom: 150px;
+    box-sizing: border-box;
+}
+
+.area-dados h1 {
+    margin: 45px;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size:32px;
+    color: #525459;
+}
+
+.span-valor {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    padding: 4px;
+    color: #0D8A4F;
+    background-color: rgba(13, 138, 79, 0.1);
+}
