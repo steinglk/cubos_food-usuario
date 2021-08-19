@@ -17,4 +17,6 @@ rotas.get('/restaurantes', restaurantes.listarRestaurantes);
 
 rotas.get('/:id/produtos', produtos.produtosAtivos );
 
+rotas.get('/restaurante/:id', restaurantes.listarUmRestaurante );
+
 module.exports = rotas;

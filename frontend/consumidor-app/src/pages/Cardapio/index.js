@@ -1,23 +1,22 @@
 import React from 'react';
 import './styles.css';
+import pedidoMinimo from '../../assets/pedidoMinimo.svg'
+import tempoEntrega from '../../assets/tempoEntrega.svg'
+import semProduto from '../../assets/semProdutos.svg'
 import { useState } from 'react';
-import { useEffect, useContext } from 'react';
-import pizza from '../../assets/pizarria.png';
-import bg from '../../assets/bg-restaurante.svg';
+import { useEffect } from 'react';
 import { useRouteMatch } from "react-router-dom";
 
 function Cardapio() {
-    const [restaurantes, setRestaurantes] = useState([]);
-    const [header, setHeader] = useState('');
-    const [nome, setNome] = useState('');
+    const [restaurante, setRestaurante] = useState({});
+    const [produtos, setProdutos] = useState([]);
+    const [temProdutos, setTemProdutos] = useState(true)
     const [abrirPerfil, setAbrirPerfil] = useState(false);
     const [perfil, setPerfil] = useState('');
-    const [filtro, setFiltro] = useState('');
     const [existe, setExiste] = useState(true);
     const {params} = useRouteMatch();
 
-    async function carregarRestaurante() {
-        console.log(params)
+    async function carregarProdutos() {
         const resposta = await fetch(`http://localhost:8001/${params.id}/produtos`, {
             method: 'GET',
             headers: {
@@ -26,27 +25,31 @@ function Cardapio() {
         });
         const produtos = await resposta.json();
         
-        setRestaurantes(produtos);
-    }
-    useEffect(() => {
-        
-        carregarRestaurante();
+        setProdutos(produtos);
 
-        async function carregarHeader() {
-            const resposta = await fetch('http://localhost:8001/header', {
-                method: 'GET',
-                headers:{
-                    'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
-                }
-            });
-
-            const dadosHeader = await resposta.json();
-            
-            setNome(dadosHeader.nomeRestaurante);
-            setHeader(dadosHeader.categoriaWallpaper);
-            setPerfil(dadosHeader.imagemPerfil)
+        if (produtos.length !== 0) {
+            setTemProdutos(true);
+        } else {
+            setTemProdutos(false);
         }
-        carregarHeader();
+    }
+
+    async function carregarRestaurante() {
+        const resposta = await fetch(`http://localhost:8001/restaurante/${params.id}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
+            }
+        });
+        const restaurante = await resposta.json();
+        
+        setRestaurante(restaurante[0]);
+    }
+
+
+    useEffect(() => {
+        carregarProdutos()
+        carregarRestaurante();
     }, []);
 
     function handleLogout() {
@@ -58,52 +61,78 @@ function Cardapio() {
     function openModalPerfil(){
         setAbrirPerfil(true);
     }
-    
-    function filtrarRestaurante(e) {
-        setFiltro(e);
-    }
 
     
     return (
         <div>
-            <div className='flex-row background-produtos container-background' style={{backgroundImage: {bg}}}>
-                <h2>{nome}</h2>
-                <p onClick={() => handleLogout()} >Sair</p>
+            <div className='flex-row background-produtos container-background' style={{backgroundImage: `url(${restaurante.categoria})`}}>
+                <h2>{restaurante.nome}</h2>
+                <p onClick={() => handleLogout()} >Logout</p>
             </div>
             <div className='conteiner-perfil'>
                 <img className='imagem-perfil img-absolute' 
-                src={pizza} />
+                src={restaurante.imagem_restaurante} />
             </div>
-                <div>
+
+            <div className='flex-row revisar'>
+                <button className='btn-orange'>Revisar pedido</button>
+            </div>
+
+            <div className='flex-row space-around infor-margem'>
+                <div className='flex-row items-center'>
+                    <img src={pedidoMinimo}/>
+                    <span className='infor-p'>Pedido Mínimo: </span>
+                    <span>R$:{restaurante.valor_minimo_pedido/100}</span>
+                </div>
+                <div className='flex-row items-center'>
+                    <img src={tempoEntrega}/>
+                    <span className='infor-p'>Tempo de Entrega: </span>
+                    <span>{restaurante.tempo_entrega_minutos} min</span>
+                </div>
+                <div className='sobre'>
+                    <span>{restaurante.descricao}</span>
+                </div>
+            </div>
+
+            <div>
                 <div className='total-tela'>
-                    <div className="flex-row content-center items-center">
-                    <div className='container-itens'>
-                        
-                        {restaurantes.map(restaurante =>(
-                                <div className="div-card">
-                                <div className="card-content flex-row">
-                                    <div className='flex-column texto-card'>
-                                        <div>
-                                            <h4>{restaurante.nome}</h4>
+                        {temProdutos ? 
+                            (<div className="flex-row content-center items-center">
+                            <div className='container-itens'>
+                                {produtos.map(produto =>(
+                                    <div className="div-card">
+                                    <div className="card-content flex-row">
+                                        <div className='flex-column texto-card'>
+                                            <div>
+                                                <h4>{produto.nome}</h4>
+                                            </div>
+                                            <div className='estilo-p'>
+                                                <p>{produto.descricao}</p>
+                                            </div>
+                                            <div>
+                                                <span className='estilo-span'>R$: {produto.preco/100}</span>
+                                            </div>
                                         </div>
-                                        <div className='estilo-p'>
-                                            <p>{restaurante.descricao}</p>
-                                        </div>
-                                        <div>
-                                            <span className='estilo-span'>$$$</span>
-                                        </div>
-                                    </div>
-                                    <div className='div-imagem-card'>
-                                        <div > 
-                                            <img src={restaurante.imagem_produto} alt="imagem do produto" className='imagem-card' />
+                                        <div className='div-imagem-card'>
+                                            <div > 
+                                                <img src={produto.imagem_produto} alt="imagem do produto" className='imagem-card' />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            )) 
+                            }
                             </div>
-                        )) 
-                        } 
                     </div>
-                    </div>
+                    ) : 
+                            <div className='semProduto flex-column items-center content-center'>
+                                <div className='flex-column items-center content-center margem-interna'>
+                                    <img src={semProduto} className='distancia' />
+                                    <span>Desculpe, estamos sem procutos ativos </span>
+                                </div>
+                            </div>
+                        }
+                    
                 </div>   
             </div>
         </div>
