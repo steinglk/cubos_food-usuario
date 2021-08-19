@@ -32,7 +32,7 @@ function Cadastro() {
             return;
         }
 
-        const resposta = await fetch('http://localhost:8000/cadastro', {
+        const resposta = await fetch('http://localhost:8001/cadastro', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -56,8 +56,6 @@ function Cadastro() {
 
     return (
         <div className='container-cadastro'>
-            <div >
-                
                 <div className="logo-area flex-column">
                     <img className="logo-posicao" src={logo} />
                     <img className="barril-pos" src={barril}/>
@@ -66,7 +64,7 @@ function Cadastro() {
                     <img src={centroImg} />
                 </div>
                 <img className="fundo-cadastro" src={detalhe} /> 
-            </div>
+           
 
             <div className='cadastro-form-container'>
                 <form className='form-cadastro' onSubmit={handleSubmit(onSubmit)}>

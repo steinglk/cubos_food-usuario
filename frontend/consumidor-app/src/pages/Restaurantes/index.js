@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import './styles.css';
 import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import pizza from '../../assets/pizarria.png';
 import bg from '../../assets/bg-restaurante.svg';
-import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../routes';
 
-function Restaurantes() {
+function Restaurantes() { 
     const [restaurantes, setRestaurantes] = useState([]);
     const [header, setHeader] = useState('');
     const [nome, setNome] = useState('');
     const [abrirPerfil, setAbrirPerfil] = useState(false);
     const [perfil, setPerfil] = useState('');
-    const [filtro, setFiltro] = useState('')
+    const [filtro, setFiltro] = useState('');
+    const [existe, setExiste] = useState(true);
+    const history = useHistory();
+    const { idRestaurante } = useContext(AuthContext);
+
+    function cardapio(id) {
+        history.push(`/restaurante/${id}`);
+    }
 
     async function carregarRestaurante() {
-        const resposta = await fetch('http://localhost:8000/restaurantes', {
+        const resposta = await fetch('http://localhost:8001/restaurantes', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
@@ -31,7 +39,7 @@ function Restaurantes() {
         carregarRestaurante();
 
         async function carregarHeader() {
-            const resposta = await fetch('http://localhost:8000/header', {
+            const resposta = await fetch('http://localhost:8001/header', {
                 method: 'GET',
                 headers:{
                     'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
@@ -63,9 +71,9 @@ function Restaurantes() {
 
     function handleFilter(restaurante) {
         if (restaurante.nome.toLowerCase().includes(filtro.toLowerCase())) {
-            
             return restaurante
         }
+        return false
     }
     
     return (
@@ -90,34 +98,35 @@ function Restaurantes() {
                         />
                     </div>
 
-                    <div className="flex-row content-center items-center">
+                    <div className="flex-row content-center items-center" >
                     <div className='container-itens'>
-                        {filtro !== -1 ? (restaurantes.filter(handleFilter).map(restaurante => (
-                        <div className="div-card">
-                            <div className="card-content flex-row">
-                            <div className='flex-column texto-card'>
-                                <div>
-                                    <h4>{restaurante.nome}</h4>
-                                </div>
-                                <div className='estilo-p'>
-                                    <p>{restaurante.descricao}</p>
-                                </div>
-                                <div>
-                                    <span className='estilo-span'>$$$</span>
+                        
+                        {restaurantes.filter(handleFilter).map(restaurante =>(
+                                <div className="div-card" onClick={() => cardapio(restaurante.id)}>
+                                <div className="card-content flex-row">
+                                    <div className='flex-column texto-card'>
+                                        <div>
+                                            <h4>{restaurante.nome}</h4>
+                                        </div>
+                                        <div className='estilo-p'>
+                                            <p>{restaurante.descricao}</p>
+                                        </div>
+                                        <div>
+                                            <span className='estilo-span'>$$$</span>
+                                        </div>
+                                    </div>
+                                    <div className='div-imagem-card'>
+                                        <div > 
+                                            <img src={restaurante.imagem_restaurante} alt="imagem do produto" className='imagem-card' />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='div-imagem-card'>
-                                <div > 
-                                    <img src={restaurante.imagem_restaurante} alt="imagem do produto" className='imagem-card' />
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        ))) : (
-                            <div className="items-center content-center">
-                                <p>Nenhum produto encontrado</p>
-                            </div>
-                        )}
+                        )) 
+                        } 
+                        {restaurantes.filter(handleFilter).length ? ''  : (
+                            <div className="h1-vazio"><h1>Nenhum restaurante encontrado</h1></div>
+                            )}
                     </div>
                     </div>
                 </div>   

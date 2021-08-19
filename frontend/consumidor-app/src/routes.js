@@ -9,12 +9,12 @@ import {
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Restaurantes from './pages/Restaurantes'
+import Cardapio from './pages/Cardapio';
 
 export const AuthContext = createContext();
 
 function RotasProtegidas(props) {
     const { token } = useContext(AuthContext);
-
     return(
         <Route render={() => (localStorage.getItem('@usuario/token') ? props.children : <Redirect to='/' />)} />
     )
@@ -38,7 +38,8 @@ function Routes() {
                     <Route path="/" exact component={Login} />
                     <Route path="/cadastro" component={Cadastro} />
                     <RotasProtegidas>
-                        <Route path="/restaurantes" component={Restaurantes}/>
+                        <Route path="/restaurantes" exact component={Restaurantes}/>
+                        <Route path= "/restaurante/:id" exact component={Cardapio}/>
                     </RotasProtegidas>
                 </Switch>
             </Router>
