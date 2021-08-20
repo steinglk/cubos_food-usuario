@@ -105,6 +105,8 @@ function Cardapio() {
                                     <div> 
                                     {openProduto ? 
                                         (<ModalProduto 
+                                        setOpen={setOpenProduto}
+                                        open={openProduto}
                                         dadosProduto={produto} 
                                         dadosRestaurante={restaurante}/>) : "" }
                                     

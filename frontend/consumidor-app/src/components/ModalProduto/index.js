@@ -6,9 +6,8 @@ import {useState} from 'react';
 import mais from '../../assets/mais.svg';
 import menos from '../../assets/menos.svg'
 
-function ModalProduto({dadosProduto, dadosRestaurante}) {
+function ModalProduto({dadosProduto, dadosRestaurante, setOpen}) {
     const [contador, setContador] = useState(0);
-    console.log(dadosProduto);
     function handleContador(soma) {
         const validarSoma = contador + soma;
         if(validarSoma < 0 ) return;
@@ -19,6 +18,7 @@ function ModalProduto({dadosProduto, dadosRestaurante}) {
     return (
         <div className="modal">
             <div className="modal-produto">
+                <img className="close-button"  onClick={() => setOpen(false)} src={mais}/>
                 <img className="img-modal" src={dadosProduto.imagem_produto} />
                 <img className='imagem-produtos img-absolute' 
                 src={dadosRestaurante.imagem_restaurante} />
