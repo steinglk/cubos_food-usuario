@@ -8,7 +8,7 @@ import menos from '../../assets/menos.svg'
 
 function ModalProduto({dadosProduto, dadosRestaurante}) {
     const [contador, setContador] = useState(0);
-    console.log(dadosRestaurante);
+    console.log(dadosProduto);
     function handleContador(soma) {
         const validarSoma = contador + soma;
         if(validarSoma < 0 ) return;
@@ -19,20 +19,20 @@ function ModalProduto({dadosProduto, dadosRestaurante}) {
     return (
         <div className="modal">
             <div className="modal-produto">
-                <div className="img-modal">a </div>
+                <img className="img-modal" src={dadosProduto.imagem_produto} />
                 <img className='imagem-produtos img-absolute' 
-                src={pizza} />
+                src={dadosRestaurante.imagem_restaurante} />
                 <div className="flex-column area-dados space-around">
                     <h1>{dadosProduto.nome}</h1>
                     <div className="flex-row space-around mx-lg">
                         <img src={moneyicon} />
-                        <p>Pedido Mínimo: <span>{dadosProduto.pedidoMinimo}</span></p>
+                        <p className="bold">Pedido Mínimo: <span className="normal-weight">{dadosRestaurante.valor_minimo_pedido}</span></p>
                         <img src={tempoicon} />
-                        <p>Pedido Mínimo: <span>{dadosProduto.pedidoMinimo}</span></p>
+                        <p className="bold" >Tempo de entrega: <span className="normal-weight">{dadosRestaurante.taxa_entrega}</span></p>
                     </div>
                     <div className="flex-row space-around mx-lg my-lg">
                         <p>{dadosProduto.descricao}</p>
-                        <span className='span-valor'>{dadosProduto.preco}</span> 
+                        <span className='span-valor'>{dadosProduto.preco/10}</span> 
                     </div>
                     <div className="flex-row space-around items-center">
                         <div className="flex-row contador">

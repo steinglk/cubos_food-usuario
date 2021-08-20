@@ -44,9 +44,9 @@ function Cardapio() {
                 'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
             }
         });
-        const restaurante = await resposta.json();
-        setRestaurante(restaurante[0]);
-        infoRestaurante = restaurante[0];
+        const restauranteRetorno = await resposta.json();
+        setRestaurante(restauranteRetorno[0]);
+        
     }
 
 
@@ -106,7 +106,7 @@ function Cardapio() {
                                     {openProduto ? 
                                         (<ModalProduto 
                                         dadosProduto={produto} 
-                                        dadosRestaurante={infoRestaurante}/>) : "" }
+                                        dadosRestaurante={restaurante}/>) : "" }
                                     
                                     <div onClick={()=> setOpenProduto(true)}  className="div-card">
                                     
