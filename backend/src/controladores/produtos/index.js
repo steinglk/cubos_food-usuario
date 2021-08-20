@@ -28,9 +28,12 @@ const adicionarProduto = async (req, res) => {
             .where({ id: produto_id })
             .first();
 
+            
         if (!produtoEncontrado) {
             return res.status(400).json("O Produto não foi encontrado");
         }
+ 
+
 
         const pedidoEncontrado = await knex('itens')
             .where({ pedido_id });
@@ -68,6 +71,12 @@ const adicionarProduto = async (req, res) => {
             return res.status(400).json("Os itens não foram inseridos ao pedido");
         }
 
+        const restauranteEncontrado = await knex('restaurante')
+        .where({ id: produtoEncontrado.restaurante_id })
+        .first();
+
+        const entrega = restauranteEncontrado.taxa_entrega; 
+
         const atualizarPedido = await knex('itens')
             .where({ pedido_id });
 
@@ -75,10 +84,14 @@ const adicionarProduto = async (req, res) => {
             subtotal = subtotal + pedido.quantidade * pedido.preco_produto;
         }
 
+        const total = entrega + subtotal; 
+
         const atualizandoPedido = await knex('pedido')
             .where({ id: pedido_id })
             .update({
-                subtotal
+                subtotal,
+                entrega,
+                total
             }).returning('*');
 
 
