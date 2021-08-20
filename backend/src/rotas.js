@@ -19,4 +19,7 @@ rotas.get('/:id/produtos', produtos.produtosAtivos );
 
 rotas.get('/restaurante/:id', restaurantes.listarUmRestaurante );
 
+rotas.post('/produtos', produtos.adicionarProduto);
+
+
 module.exports = rotas;

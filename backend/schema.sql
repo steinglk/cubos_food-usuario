@@ -19,33 +19,25 @@ CREATE TABLE IF NOT EXISTS endereco_cliente(
   FOREIGN KEY (cliente_id) REFERENCES cliente (id)
 );
 
-CREATE TABLE IF NOT EXISTS itens(
-  id SERIAL PRIMARY KEY NOT NULL,
-  produto_id INT NOT NULL,
-  quantidade INT NOT NULL,
-  preco_produto INT NOT NULL, 
-  FOREIGN KEY (produto_id) REFERENCES produto (id)
-);
-
 CREATE TABLE IF NOT EXISTS pedido(
   id SERIAL PRIMARY KEY NOT NULL,
   cliente_id INT NOT NULL, 
   restaurante_id INT NOT NULL, 
-  itens_id INT NOT NULL, 
-  endereco_id INT NOT NULL, 
-  cep VARCHAR(100) NOT NULL,
-  subtotal TEXT NOT NULL, 
-  total TEXT NOT NULL, 
-  entrega TEXT NOT NULL,
+  endereco_id INT, 
+  subtotal INT, 
+  total INT, 
+  entrega INT,
   FOREIGN KEY (cliente_id) REFERENCES cliente (id),
   FOREIGN KEY (restaurante_id) REFERENCES restaurante (id),
-  FOREIGN KEY (endereco_id) REFERENCES endereco_cliente (id),
-  FOREIGN KEY (itens_id) REFERENCES itens (id)
+  FOREIGN KEY (endereco_id) REFERENCES endereco_cliente (id)
 );
 
-
-
-
-
-
-
+CREATE TABLE IF NOT EXISTS itens(
+  id SERIAL PRIMARY KEY NOT NULL,
+  produto_id INT NOT NULL,
+  pedido_id INT NOT NULL, 
+  quantidade INT NOT NULL,
+  preco_produto INT NOT NULL, 
+  FOREIGN KEY (produto_id) REFERENCES produto (id),
+  FOREIGN KEY (pedido_id) REFERENCES pedido (id)
+);
