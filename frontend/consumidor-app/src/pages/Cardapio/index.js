@@ -18,7 +18,7 @@ function Cardapio() {
     const [existe, setExiste] = useState(true);
     const {params} = useRouteMatch();
     
-
+    let infoRestaurante = restaurante;
     async function carregarProdutos() {
         const resposta = await fetch(`http://localhost:8001/${params.id}/produtos`, {
             method: 'GET',
@@ -45,8 +45,8 @@ function Cardapio() {
             }
         });
         const restaurante = await resposta.json();
-        
         setRestaurante(restaurante[0]);
+        infoRestaurante = restaurante[0];
     }
 
 
@@ -65,11 +65,6 @@ function Cardapio() {
         setAbrirPerfil(true);
     }
 
-    const infoRestaurante = {
-        tempo: restaurante.tempoEntrega,
-        minimo: restaurante.pedidoMinimo,
-        imgRestaurante: restaurante.imagem_restaurante,
-    }
     return (
         <div>
             <div className='flex-row background-produtos container-background' style={{backgroundImage: `url(${restaurante.categoria})`}}>
@@ -108,7 +103,10 @@ function Cardapio() {
                             <div className='container-itens'>
                                 {produtos.map(produto =>(
                                     <div> 
-                                    {openProduto ? (<ModalProduto dadosProduto={{...produto},{...infoRestaurante}} />) : "" }
+                                    {openProduto ? 
+                                        (<ModalProduto 
+                                        dadosProduto={produto} 
+                                        dadosRestaurante={infoRestaurante}/>) : "" }
                                     
                                     <div onClick={()=> setOpenProduto(true)}  className="div-card">
                                     

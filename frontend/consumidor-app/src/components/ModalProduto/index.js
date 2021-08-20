@@ -6,9 +6,9 @@ import {useState} from 'react';
 import mais from '../../assets/mais.svg';
 import menos from '../../assets/menos.svg'
 
-function ModalProduto({dadosProduto}) {
+function ModalProduto({dadosProduto, dadosRestaurante}) {
     const [contador, setContador] = useState(0);
-    console.log(dadosProduto);
+    console.log(dadosRestaurante);
     function handleContador(soma) {
         const validarSoma = contador + soma;
         if(validarSoma < 0 ) return;
