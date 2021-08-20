@@ -3,20 +3,12 @@ import pizza from '../../assets/pizarria.png';
 import moneyicon from '../../assets/money-icon.svg';
 import tempoicon from '../../assets/tempo-icon.svg';
 import {useState} from 'react';
+import mais from '../../assets/mais.svg';
+import menos from '../../assets/menos.svg'
 
-
-function ModalProduto() {
+function ModalProduto({dadosProduto}) {
     const [contador, setContador] = useState(0);
-    const quantidade= 0;
-    const dadosProduto = {
-        nome: "Pizza portuguesa",
-        preco: 2000,
-        img: '../../assets/pizzaria.png',
-        pedidoMinimo: "R$ 20,00",
-        tempoEntrega: "40 - 60min",
-        descricao: "é bom mesmo póde confiar"
-    }
-
+    console.log(dadosProduto);
     function handleContador(soma) {
         const validarSoma = contador + soma;
         if(validarSoma < 0 ) return;
@@ -42,13 +34,13 @@ function ModalProduto() {
                         <p>{dadosProduto.descricao}</p>
                         <span className='span-valor'>{dadosProduto.preco}</span> 
                     </div>
-                    <div className="flex-row space-around">
-                        <div className="flex-row">
-                        <button onClick={() => handleContador(-1)}>-</button>
-                        <p>{contador}</p>
-                        <button onClick={() => handleContador(1)}>+</button>
+                    <div className="flex-row space-around items-center">
+                        <div className="flex-row contador">
+                            <button className="btn-orange-left" onClick={() => handleContador(-1)}><img src={menos} /></button>
+                            <p >{contador}</p>
+                            <button className="btn-orange-right" onClick={() => handleContador(1)}><img src={mais} /></button>
                         </div>
-                        <button>Adicionar produto ao carrinho</button>
+                        <button className="btn-orange mb-lg">Adicionar produto ao carrinho</button>
                     </div>
                 </div>
             </div>

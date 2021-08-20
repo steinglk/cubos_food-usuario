@@ -47,3 +47,13 @@
     color: #0D8A4F;
     background-color: rgba(13, 138, 79, 0.1);
 }
+
+.contador p{
+    margin-bottom: 3rem;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+    margin: 10px 0 0 0;
+}

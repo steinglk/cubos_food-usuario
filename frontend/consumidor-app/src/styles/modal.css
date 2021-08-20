@@ -20,3 +20,11 @@
     width: 70%;
     height: 78%;
 }
+
+.modal-produto {
+    background-color: #ffffff;
+    border-radius: 15px;
+    position: relative;
+    width: 625px;
+    height: 78%;
+}

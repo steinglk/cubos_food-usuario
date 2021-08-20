@@ -6,15 +6,18 @@ import semProduto from '../../assets/semProdutos.svg'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRouteMatch } from "react-router-dom";
+import ModalProduto from '../../components/ModalProduto';
 
 function Cardapio() {
     const [restaurante, setRestaurante] = useState({});
+    const [openProduto, setOpenProduto] = useState(false);
     const [produtos, setProdutos] = useState([]);
     const [temProdutos, setTemProdutos] = useState(true)
     const [abrirPerfil, setAbrirPerfil] = useState(false);
     const [perfil, setPerfil] = useState('');
     const [existe, setExiste] = useState(true);
     const {params} = useRouteMatch();
+    
 
     async function carregarProdutos() {
         const resposta = await fetch(`http://localhost:8001/${params.id}/produtos`, {
@@ -62,7 +65,11 @@ function Cardapio() {
         setAbrirPerfil(true);
     }
 
-    
+    const infoRestaurante = {
+        tempo: restaurante.tempoEntrega,
+        minimo: restaurante.pedidoMinimo,
+        imgRestaurante: restaurante.imagem_restaurante,
+    }
     return (
         <div>
             <div className='flex-row background-produtos container-background' style={{backgroundImage: `url(${restaurante.categoria})`}}>
@@ -100,7 +107,11 @@ function Cardapio() {
                             (<div className="flex-row content-center items-center">
                             <div className='container-itens'>
                                 {produtos.map(produto =>(
-                                    <div className="div-card">
+                                    <div> 
+                                    {openProduto ? (<ModalProduto dadosProduto={{...produto},{...infoRestaurante}} />) : "" }
+                                    
+                                    <div onClick={()=> setOpenProduto(true)}  className="div-card">
+                                    
                                     <div className="card-content flex-row">
                                         <div className='flex-column texto-card'>
                                             <div>
@@ -119,6 +130,7 @@ function Cardapio() {
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 </div>
                             )) 
                             }
