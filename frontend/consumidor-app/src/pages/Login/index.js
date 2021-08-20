@@ -40,7 +40,7 @@ function Login() {
             return;
         }
 
-        localStorage.setItem('@usuario/cliente_id', cliente.id);
+        
         localStorage.setItem('@usuario/token', token);
         localStorage.getItem('@usuario/token');
 
