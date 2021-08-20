@@ -33,17 +33,18 @@ function Login() {
             }
         });
 
-        const {token} = await resposta.json();
+        const {token, cliente} = await resposta.json();
 
         if (!token) {
             toast.error('E-mail e/ou senha incorretos!', toastConfig);
             return;
         }
 
+        localStorage.setItem('@usuario/cliente_id', cliente.id);
         localStorage.setItem('@usuario/token', token);
         localStorage.getItem('@usuario/token');
 
-        logar(localStorage.getItem('@usuario/token'));
+        logar(localStorage.getItem('@usuario/token', 'usuario/cliente_id'));
 
         history.push('/restaurantes');
     }

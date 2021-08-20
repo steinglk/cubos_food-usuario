@@ -55,6 +55,10 @@ function Cardapio() {
         carregarRestaurante();
     }, []);
 
+    function handleBag(novoProduto) {
+        
+    }
+
     function handleLogout() {
         localStorage.removeItem('@usuario/token');
     
@@ -105,6 +109,7 @@ function Cardapio() {
                                     <div> 
                                     {openProduto ? 
                                         (<ModalProduto 
+                                        sacola ={handleBag}
                                         setOpen={setOpenProduto}
                                         open={openProduto}
                                         dadosProduto={produto} 
