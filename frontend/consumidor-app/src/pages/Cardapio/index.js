@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRouteMatch } from "react-router-dom";
 import ModalProduto from '../../components/ModalProduto';
+import ModalCarrinho from '../../components/ModalCarrinho';
 
 function Cardapio() {
     const [restaurante, setRestaurante] = useState({});
@@ -67,6 +68,7 @@ function Cardapio() {
 
     return (
         <div>
+            
             <div className='flex-row background-produtos container-background' style={{backgroundImage: `url(${restaurante.categoria})`}}>
                 <h2>{restaurante.nome}</h2>
                 <p onClick={() => handleLogout()} >Logout</p>
@@ -140,13 +142,13 @@ function Cardapio() {
                             <div className='semProduto flex-column items-center content-center'>
                                 <div className='flex-column items-center content-center margem-interna'>
                                     <img src={semProduto} className='distancia' />
-                                    <span>Desculpe, estamos sem procutos ativos </span>
+                                    <span>Desculpe, estamos sem produtos ativos </span>
                                 </div>
                             </div>
                         }
-                    
                 </div>   
             </div>
+            <ModalCarrinho />
         </div>
     );
 }
