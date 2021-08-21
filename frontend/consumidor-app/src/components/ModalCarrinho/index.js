@@ -2,9 +2,6 @@ import './style.css';
 import Carrinho from '../../assets/carrinho.svg';
 
 function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  taxa}){
-
-    console.log(novosProdutos);
-
     return(
         <div>
             {openCarrinho && 
