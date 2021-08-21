@@ -17,7 +17,9 @@ function Cardapio() {
     const [abrirPerfil, setAbrirPerfil] = useState(false);
     const [perfil, setPerfil] = useState('');
     const [existe, setExiste] = useState(true);
+    const [abrirCarrinho, setAbrirCarrinho] = useState(false);
     const {params} = useRouteMatch();
+    const [novosProdutos, setNovosProdutos] = useState([])
     
     let infoRestaurante = restaurante;
     async function carregarProdutos() {
@@ -50,24 +52,26 @@ function Cardapio() {
         
     }
 
+    function openModalPerfil(){
+        setAbrirCarrinho(true);
+    }
+
 
     useEffect(() => {
         carregarProdutos()
         carregarRestaurante();
     }, []);
 
+
     function handleBag(novoProduto) {
-        
+        setNovosProdutos([... novosProdutos, novoProduto]);
     }
+
 
     function handleLogout() {
         localStorage.removeItem('@usuario/token');
     
         window.location.reload();
-    }
-
-    function openModalPerfil(){
-        setAbrirPerfil(true);
     }
 
     return (
@@ -83,7 +87,7 @@ function Cardapio() {
             </div>
 
             <div className='flex-row revisar'>
-                <button className='btn-orange'>Revisar pedido</button>
+                <button className='btn-orange' onClick={() => setAbrirCarrinho(true)}>Revisar pedido</button>
             </div>
 
             <div className='flex-row space-around infor-margem'>
@@ -153,7 +157,11 @@ function Cardapio() {
                         }
                 </div>   
             </div>
-            <ModalCarrinho />
+            <ModalCarrinho 
+            setOpenCarrinho={setAbrirCarrinho} 
+            openCarrinho={abrirCarrinho} 
+            novosProdutos={novosProdutos} 
+            setNovosProdutos={setNovosProdutos} />
         </div>
     );
 }

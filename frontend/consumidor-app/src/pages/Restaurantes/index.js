@@ -10,7 +10,6 @@ function Restaurantes() {
     const [restaurantes, setRestaurantes] = useState([]);
     const [header, setHeader] = useState('');
     const [nome, setNome] = useState('');
-    const [abrirPerfil, setAbrirPerfil] = useState(false);
     const [perfil, setPerfil] = useState('');
     const [filtro, setFiltro] = useState('');
     const [existe, setExiste] = useState(true);
@@ -29,7 +28,6 @@ function Restaurantes() {
         });
 
         const restaurantesRetornados = await resposta.json();
-
         setRestaurantes(restaurantesRetornados);
     }
     useEffect(() => {
@@ -59,9 +57,6 @@ function Restaurantes() {
         window.location.reload();
     }
 
-    function openModalPerfil(){
-        setAbrirPerfil(true);
-    }
     
     function filtrarRestaurante(e) {
         setFiltro(e);
