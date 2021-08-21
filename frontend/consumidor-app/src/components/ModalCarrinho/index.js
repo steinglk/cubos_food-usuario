@@ -1,8 +1,7 @@
 import './style.css';
 import Carrinho from '../../assets/carrinho.svg';
-import CadastroImg from '../../assets/pizarria.png';
 
-function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos}){
+function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  taxa}){
 
     console.log(novosProdutos);
 
@@ -35,7 +34,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos}){
                                 </div>
                                 <div className='infor-produtos flex-column space-around'>
                                     <span className='infor-nome'>{produto.nome_produto}</span>
-                                    <span>{produto.quantidade} unidade</span>
+                                    <span>{produto.quantidade} unidade(s)</span>
                                     <span className='infor-valor'>R$ {produto.valor_produto/100}</span>
                                 </div>
                             </div>
@@ -49,15 +48,15 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos}){
                             <div className='rodapeModal'>
                                 <div className='subTotal marginRodape flex-row space-between'>
                                     <span>Subtotal</span>
-                                    <span className='rodapeWeight fontRodape'>R$ {}</span>
+                                    <span className='rodapeWeight fontRodape'>R$ {price/100}</span>
                                 </div>
                                 <div className='taxa marginRodape flex-row space-between'>
                                     <span>Taxa de entrega</span>
-                                    <span className='rodapeWeight fontRodape'>R$ 8,90</span>
+                                    <span className='rodapeWeight fontRodape'>R$ {taxa/100}</span>
                                 </div>
                                 <div className='total marginRodape flex-row space-between'>
                                     <span>Total</span>
-                                    <span className='rodapeWeight fontValor'>R$ 308,87</span>
+                                    <span className='rodapeWeight fontValor'>R$ {(price+taxa)/100}</span>
                                 </div>
                             </div>
                             <div className='flex-row space-around'>

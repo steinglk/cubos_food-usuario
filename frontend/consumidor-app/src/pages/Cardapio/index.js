@@ -20,8 +20,8 @@ function Cardapio() {
     const [abrirCarrinho, setAbrirCarrinho] = useState(false);
     const {params} = useRouteMatch();
     const [novosProdutos, setNovosProdutos] = useState([])
-    
-    let infoRestaurante = restaurante;
+    const [price, setPrice] = useState(0);
+
     async function carregarProdutos() {
         const resposta = await fetch(`http://localhost:8001/${params.id}/produtos`, {
             method: 'GET',
@@ -62,8 +62,20 @@ function Cardapio() {
         carregarRestaurante();
     }, []);
 
+/* Adicionar produtos a sacola */
 
     function handleBag(novoProduto) {
+        const newProdutos = [... novosProdutos];
+        const isInBag = newProdutos.find(p => p.id === novoProduto.id);
+
+        setPrice(price + (novoProduto.valor_produto * novoProduto.quantidade));
+
+        if(isInBag){
+            isInBag.quantidade = isInBag.quantidade + novoProduto.quantidade;
+            setNovosProdutos(newProdutos);
+            return;
+        }
+        console.log(novoProduto);
         setNovosProdutos([... novosProdutos, novoProduto]);
     }
 
@@ -161,7 +173,9 @@ function Cardapio() {
             setOpenCarrinho={setAbrirCarrinho} 
             openCarrinho={abrirCarrinho} 
             novosProdutos={novosProdutos} 
-            setNovosProdutos={setNovosProdutos} />
+            setNovosProdutos={setNovosProdutos}
+            price={price}
+            taxa={restaurante.taxa_entrega} />
         </div>
     );
 }

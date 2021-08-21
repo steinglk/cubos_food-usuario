@@ -39,7 +39,7 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola}) {
                     </div>
                     <div className="flex-row space-around mx-lg my-lg">
                         <p>{dadosProduto.descricao}</p>
-                        <span className='span-valor'>{dadosProduto.preco/10}</span> 
+                        <span className='span-valor'>{dadosProduto.preco/100}</span> 
                     </div>
                     <div className="flex-row space-around items-center">
                         <div className="flex-row contador">
