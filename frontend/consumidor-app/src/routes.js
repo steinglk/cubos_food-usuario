@@ -22,9 +22,11 @@ function RotasProtegidas(props) {
 
 function Routes() {
     const [token, setToken] = useState('');
+    const [clienteId, setClienteId] = useState('');
 
-    function logar(tokenLogar) {
+    function logar(tokenLogar, clienteLogado) {
         setToken(tokenLogar);
+        setClienteId(clienteLogado);
     }
 
     function deslogar() {

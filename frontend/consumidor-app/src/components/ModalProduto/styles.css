@@ -1,4 +1,6 @@
-
+.modal-produto{
+    overflow: auto;
+}
 
 .img-modal {
     width: inherit;

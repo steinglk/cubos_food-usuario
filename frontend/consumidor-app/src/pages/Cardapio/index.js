@@ -7,6 +7,9 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRouteMatch } from "react-router-dom";
 import ModalProduto from '../../components/ModalProduto';
+import ModalCarrinho from '../../components/ModalCarrinho';
+import {toast} from 'react-toastify';
+import toastConfig from '../../tools/toastConfig';
 
 function Cardapio() {
     const [restaurante, setRestaurante] = useState({});
@@ -16,9 +19,11 @@ function Cardapio() {
     const [abrirPerfil, setAbrirPerfil] = useState(false);
     const [perfil, setPerfil] = useState('');
     const [existe, setExiste] = useState(true);
+    const [abrirCarrinho, setAbrirCarrinho] = useState(false);
     const {params} = useRouteMatch();
-    
-    let infoRestaurante = restaurante;
+    const [novosProdutos, setNovosProdutos] = useState([])
+    const [price, setPrice] = useState(0);
+
     async function carregarProdutos() {
         const resposta = await fetch(`http://localhost:8001/${params.id}/produtos`, {
             method: 'GET',
@@ -49,11 +54,37 @@ function Cardapio() {
         
     }
 
+    function openModalPerfil(){
+        setAbrirCarrinho(true);
+    }
+
 
     useEffect(() => {
         carregarProdutos()
         carregarRestaurante();
     }, []);
+
+/* Adicionar produtos a sacola */
+
+    function handleBag(novoProduto) {
+        const newProdutos = [... novosProdutos];
+        const isInBag = newProdutos.find(p => p.id === novoProduto.id);
+
+        if(!novoProduto.quantidade){
+            toast.error('Adicione alguma quantidade do produto.', toastConfig);
+            return
+        }
+
+        setPrice(price + (novoProduto.valor_produto * novoProduto.quantidade));
+
+        if(isInBag){
+            isInBag.quantidade = isInBag.quantidade + novoProduto.quantidade;
+            setNovosProdutos(newProdutos);
+            return;
+        }
+        setNovosProdutos([... novosProdutos, novoProduto]);
+    }
+
 
     function handleLogout() {
         localStorage.removeItem('@usuario/token');
@@ -61,12 +92,9 @@ function Cardapio() {
         window.location.reload();
     }
 
-    function openModalPerfil(){
-        setAbrirPerfil(true);
-    }
-
     return (
         <div>
+            
             <div className='flex-row background-produtos container-background' style={{backgroundImage: `url(${restaurante.categoria})`}}>
                 <h2>{restaurante.nome}</h2>
                 <p onClick={() => handleLogout()} >Logout</p>
@@ -77,7 +105,7 @@ function Cardapio() {
             </div>
 
             <div className='flex-row revisar'>
-                <button className='btn-orange'>Revisar pedido</button>
+                <button className='btn-orange' onClick={() => setAbrirCarrinho(true)}>Revisar pedido</button>
             </div>
 
             <div className='flex-row space-around infor-margem'>
@@ -105,6 +133,7 @@ function Cardapio() {
                                     <div> 
                                     {openProduto ? 
                                         (<ModalProduto 
+                                        sacola ={handleBag}
                                         setOpen={setOpenProduto}
                                         open={openProduto}
                                         dadosProduto={produto} 
@@ -140,13 +169,19 @@ function Cardapio() {
                             <div className='semProduto flex-column items-center content-center'>
                                 <div className='flex-column items-center content-center margem-interna'>
                                     <img src={semProduto} className='distancia' />
-                                    <span>Desculpe, estamos sem procutos ativos </span>
+                                    <span>Desculpe, estamos sem produtos ativos </span>
                                 </div>
                             </div>
                         }
-                    
                 </div>   
             </div>
+            <ModalCarrinho 
+            setOpenCarrinho={setAbrirCarrinho} 
+            openCarrinho={abrirCarrinho} 
+            novosProdutos={novosProdutos} 
+            setNovosProdutos={setNovosProdutos}
+            price={price}
+            taxa={restaurante.taxa_entrega} />
         </div>
     );
 }

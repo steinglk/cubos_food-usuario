@@ -6,13 +6,20 @@ import {useState} from 'react';
 import mais from '../../assets/mais.svg';
 import menos from '../../assets/menos.svg'
 
-function ModalProduto({dadosProduto, dadosRestaurante, setOpen}) {
+function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola}) {
     const [contador, setContador] = useState(0);
     function handleContador(soma) {
         const validarSoma = contador + soma;
         if(validarSoma < 0 ) return;
-
         setContador(contador + soma);
+    }
+
+    const dadosPedido = {
+        id: dadosProduto.id,
+        nome_produto: dadosProduto.nome,
+        imagem_produto: dadosProduto.imagem_produto,
+        quantidade: contador,
+        valor_produto: dadosProduto.preco
     }
 
     return (
@@ -32,7 +39,7 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen}) {
                     </div>
                     <div className="flex-row space-around mx-lg my-lg">
                         <p>{dadosProduto.descricao}</p>
-                        <span className='span-valor'>{dadosProduto.preco/10}</span> 
+                        <span className='span-valor'>{dadosProduto.preco/100}</span> 
                     </div>
                     <div className="flex-row space-around items-center">
                         <div className="flex-row contador">
@@ -40,7 +47,7 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen}) {
                             <p >{contador}</p>
                             <button className="btn-orange-right" onClick={() => handleContador(1)}><img src={mais} /></button>
                         </div>
-                        <button className="btn-orange mb-lg">Adicionar produto ao carrinho</button>
+                        <button className="btn-orange mb-lg" onClick={() => sacola(dadosPedido)}>Adicionar produto ao carrinho</button>
                     </div>
                 </div>
             </div>
