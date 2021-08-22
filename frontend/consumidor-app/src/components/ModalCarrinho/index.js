@@ -2,7 +2,21 @@ import './style.css';
 import Carrinho from '../../assets/carrinho.svg';
 import semProdutos from '../../assets/semProdutos.svg'
 
-function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  taxa}){
+function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  nomeRestaurante}){
+    
+    async function realizarCompra() {
+        novosProdutos.preco = (price+parseInt(novosProdutos[0].restaurante_taxa))
+        console.log(novosProdutos)
+        const resposta = await fetch(`http://localhost:8001/produtos`, {
+            method: 'PUT',
+            body: JSON.stringify(novosProdutos),
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
+            }
+        });
+        const produtos = await resposta.json();
+    }
+    
     return(
         <div>
             {openCarrinho && 
@@ -13,7 +27,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  ta
                         </div>
                         <div className='nomeRestauranteModal flex-row '>
                             <img src={Carrinho} className='margem-carrinho' />
-                            <h1>Pizza</h1>
+                            <h1>{nomeRestaurante}</h1>
                         </div>
                         <div className='enderecoModal'>
                             <span className='span-endereco'>Endereço de Entrega: </span>
@@ -25,7 +39,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  ta
                                 (<div>
                                     <div className='tempoEntregaModal'>
                                 <span>Tempo de Entrega: </span>
-                                <span className='span-tempo'>45min</span>
+                                <span className='span-tempo'>{novosProdutos[0].tempoEntrega} minutos.</span>
                             </div>
                             {novosProdutos.map(produto => (
                                 <div>
@@ -53,15 +67,15 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  ta
                                         </div>
                                         <div className='taxa marginRodape flex-row space-between'>
                                             <span>Taxa de entrega</span>
-                                            <span className='rodapeWeight fontRodape'>R$ {taxa/100}</span>
+                                            <span className='rodapeWeight fontRodape'>R$ {novosProdutos[0].restaurante_taxa/100}</span>
                                         </div>
                                         <div className='total marginRodape flex-row space-between'>
                                             <span>Total</span>
-                                            <span className='rodapeWeight fontValor'>R$ {(price+taxa)/100}</span>
+                                            <span className='rodapeWeight fontValor'>R$ {(price+parseInt(novosProdutos[0].restaurante_taxa))/100}</span>
                                         </div>
                                     </div>
                                     <div className='flex-row space-around'>
-                                        <button className='btn-orange'>Confirmar Pedido</button>
+                                        <button className='btn-orange' onClick={realizarCompra}>Confirmar Pedido</button>
                                     </div>
                                         </div>) 
                                         : 

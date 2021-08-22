@@ -67,22 +67,47 @@ function Cardapio() {
 /* Adicionar produtos a sacola */
 
     function handleBag(novoProduto) {
+        let salvarCarrinho = localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho')) : []
+        let salvarPreco = localStorage.getItem('@usuario/carrinho/preco') ? parseInt(localStorage.getItem('@usuario/carrinho/preco')) : '' 
+
+        novoProduto.restaurante_id = parseInt(params.id);
+        novoProduto.restaurante_nome = restaurante.nome;
+        novoProduto.restaurante_taxa = restaurante.taxa_entrega;
+        novoProduto.tempoEntrega = restaurante.tempo_entrega_minutos;
+        
         const newProdutos = [... novosProdutos];
         const isInBag = newProdutos.find(p => p.id === novoProduto.id);
+
+        if(salvarCarrinho.length){
+            const verificarRestaurante = [... salvarCarrinho];
+            const mesmoRestaurante = verificarRestaurante.find(id => id.restaurante_id === novoProduto.restaurante_id);
+
+            if(!mesmoRestaurante){
+                toast.error('Não é possível fazer um pedido em dois restaurantes distintos.', toastConfig);
+                return
+            }
+        }
 
         if(!novoProduto.quantidade){
             toast.error('Adicione alguma quantidade do produto.', toastConfig);
             return
         }
 
-        setPrice(price + (novoProduto.valor_produto * novoProduto.quantidade));
+        salvarPreco = salvarPreco + (novoProduto.valor_produto * novoProduto.quantidade);
+        localStorage.setItem('@usuario/carrinho/preco', salvarPreco);
 
         if(isInBag){
             isInBag.quantidade = isInBag.quantidade + novoProduto.quantidade;
             setNovosProdutos(newProdutos);
+            salvarCarrinho = newProdutos;
+            localStorage.setItem('@usuario/carrinho', JSON.stringify(salvarCarrinho));
             return;
         }
+
         setNovosProdutos([... novosProdutos, novoProduto]);
+        salvarCarrinho.push(novoProduto)
+
+        localStorage.setItem('@usuario/carrinho', JSON.stringify(salvarCarrinho));
     }
 
 
@@ -94,7 +119,6 @@ function Cardapio() {
 
     return (
         <div>
-            
             <div className='flex-row background-produtos container-background' style={{backgroundImage: `url(${restaurante.categoria})`}}>
                 <h2>{restaurante.nome}</h2>
                 <p onClick={() => handleLogout()} >Logout</p>
@@ -178,10 +202,10 @@ function Cardapio() {
             <ModalCarrinho 
             setOpenCarrinho={setAbrirCarrinho} 
             openCarrinho={abrirCarrinho} 
-            novosProdutos={novosProdutos} 
+            novosProdutos={localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho')) : novosProdutos} 
             setNovosProdutos={setNovosProdutos}
-            price={price}
-            taxa={restaurante.taxa_entrega} />
+            price={parseInt(localStorage.getItem('@usuario/carrinho/preco'))}
+            nomeRestaurante = {localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho'))[0].restaurante_nome : restaurante.nome }/>
         </div>
     );
 }
