@@ -67,7 +67,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  ta
                                         : 
                                     (<div className='semProduto flex-column items-center content-center'>
                                         <img src={semProdutos} className='distancia'/>
-                                        <span>Desculpe, estamos sem produtos ativos </span>
+                                        <span>Sem itens no carrinho</span>
                                     </div>)
                                 }
                         </div>
