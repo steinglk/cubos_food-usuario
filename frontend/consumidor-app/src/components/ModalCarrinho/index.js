@@ -1,5 +1,6 @@
 import './style.css';
 import Carrinho from '../../assets/carrinho.svg';
+import semProdutos from '../../assets/semProdutos.svg'
 
 function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  taxa}){
     return(
@@ -19,7 +20,10 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  ta
                             <span className='span-endereco2'>Av. Tancredo Neves, 2227, ed. Salvador Prime, sala 901:906; 917:920 - Caminho das Árvores, Salvador - BA, 41820-021.</span>
                         </div>
 
-                        <div className='tempoEntregaModal'>
+                        <div>
+                            {novosProdutos.length ?  
+                                (<div>
+                                    <div className='tempoEntregaModal'>
                                 <span>Tempo de Entrega: </span>
                                 <span className='span-tempo'>45min</span>
                             </div>
@@ -59,6 +63,14 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  ta
                             <div className='flex-row space-around'>
                                 <button className='btn-orange'>Confirmar Pedido</button>
                             </div>
+                                </div>) : 
+                                
+                            (<div className='semProduto flex-column items-center content-center'>
+                                <img src={semProdutos} className='distancia'/>
+                                <span>Desculpe, estamos sem produtos ativos </span>
+                            </div>)
+                        }
+                        </div>
                     </div>
                 </div>
             }

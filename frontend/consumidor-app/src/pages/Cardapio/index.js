@@ -75,7 +75,6 @@ function Cardapio() {
             setNovosProdutos(newProdutos);
             return;
         }
-        console.log(novoProduto);
         setNovosProdutos([... novosProdutos, novoProduto]);
     }
 
