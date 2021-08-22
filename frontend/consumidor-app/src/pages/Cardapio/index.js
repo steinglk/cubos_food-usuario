@@ -8,6 +8,8 @@ import { useEffect } from 'react';
 import { useRouteMatch } from "react-router-dom";
 import ModalProduto from '../../components/ModalProduto';
 import ModalCarrinho from '../../components/ModalCarrinho';
+import {toast} from 'react-toastify';
+import toastConfig from '../../tools/toastConfig';
 
 function Cardapio() {
     const [restaurante, setRestaurante] = useState({});
@@ -67,6 +69,11 @@ function Cardapio() {
     function handleBag(novoProduto) {
         const newProdutos = [... novosProdutos];
         const isInBag = newProdutos.find(p => p.id === novoProduto.id);
+
+        if(!novoProduto.quantidade){
+            toast.error('Adicione alguma quantidade do produto.', toastConfig);
+            return
+        }
 
         setPrice(price + (novoProduto.valor_produto * novoProduto.quantidade));
 
