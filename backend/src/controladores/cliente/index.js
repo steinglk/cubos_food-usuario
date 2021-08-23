@@ -44,14 +44,14 @@ const adicionarEndereco = async (req, res) => {
         complemento,
     } = req.body;
 
-    if ( !cep || !endereco || !complemento) {
+    if (!id || !cep || !endereco) {
         return res.status(400).json("Todos os campos são obrigatórios");
     }
 
     try {
         const clienteExiste = await knex('cliente')
             .select('id')
-            .where({ id: id })
+            .where({ id: cliente_id })
             .first();
 
         if (!clienteExiste) {

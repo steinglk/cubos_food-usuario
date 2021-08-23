@@ -22,6 +22,7 @@ function Cardapio() {
     const [abrirCarrinho, setAbrirCarrinho] = useState(false);
     const {params} = useRouteMatch();
     const [novosProdutos, setNovosProdutos] = useState([])
+    const [produtoSelecionado, setProdutoSelecionado] = useState({})
 
     async function carregarProdutos() {
         const resposta = await fetch(`http://localhost:8001/${params.id}/produtos`, {
@@ -149,15 +150,10 @@ function Cardapio() {
                             <div className='container-itens'>
                                 {produtos.map(produto =>(
                                     <div> 
-                                    {openProduto ? 
-                                        (<ModalProduto 
-                                        sacola ={handleBag}
-                                        setOpen={setOpenProduto}
-                                        open={openProduto}
-                                        dadosProduto={produto} 
-                                        dadosRestaurante={restaurante}/>) : "" }
                                     
-                                    <div onClick={()=> setOpenProduto(true)}  className="div-card">
+                                    <div onClick={()=> {setProdutoSelecionado(produto)
+                                    setOpenProduto(true)}
+                                         }  className="div-card">
                                     
                                     <div className="card-content flex-row">
                                         <div className='flex-column texto-card'>
@@ -181,6 +177,11 @@ function Cardapio() {
                                 </div>
                             )) 
                             }
+                            {produtoSelecionado && <ModalProduto 
+                                        setOpen={setProdutoSelecionado}
+                                        sacola ={handleBag}
+                                        dadosProduto={produtoSelecionado} 
+                                        dadosRestaurante={restaurante}/>}
                             </div>
                     </div>
                     ) : 
