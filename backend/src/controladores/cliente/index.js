@@ -37,21 +37,21 @@ const cadastrarCliente = async (req, res) => {
 }
 
 const adicionarEndereco = async (req, res) => {
+    const {id} = req.usuario;
     const {
-        cliente_id,
         cep,
         endereco,
         complemento,
     } = req.body;
 
-    if (!cliente_id || !cep || !endereco || !complemento) {
+    if ( !cep || !endereco || !complemento) {
         return res.status(400).json("Todos os campos são obrigatórios");
     }
 
     try {
         const clienteExiste = await knex('cliente')
             .select('id')
-            .where({ id: cliente_id })
+            .where({ id: id })
             .first();
 
         if (!clienteExiste) {
@@ -60,12 +60,12 @@ const adicionarEndereco = async (req, res) => {
 
         const enderecoExiste = await knex('endereco_cliente')
             .select('id')
-            .where({ id: cliente_id })
+            .where({ id: id })
             .first();
 
         if (enderecoExiste) {
             const atualizandoEndereco = await knex('endereco_cliente')
-                .where({ id: cliente_id })
+                .where({ id: id })
                 .update({
                     cep,
                     endereco,
@@ -81,7 +81,7 @@ const adicionarEndereco = async (req, res) => {
 
         const cadastrandoEndereco = await knex('endereco_cliente')
             .insert({
-                cliente_id,
+                id,
                 cep,
                 endereco,
                 complemento,
@@ -97,7 +97,7 @@ const adicionarEndereco = async (req, res) => {
 
 const verificarEndereco = async (req, res) => {
     
-    const { id } = req.params;
+    const { id } = req.usuario;
 
     try {
         const enderecoEncontrado = await knex('endereco_cliente')
@@ -106,7 +106,7 @@ const verificarEndereco = async (req, res) => {
             .first();
 
         if (!enderecoEncontrado) {
-            return res.status(400).json("O cliente não possui um endereço cadastrado em nosso sistema");
+            return res.status(400).json(null);
         }
 
         return res.status(200).json(enderecoEncontrado);

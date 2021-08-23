@@ -106,3 +106,23 @@
 .fontValor{
     font-size: 24px;
 }
+
+.adicionar-endereco{
+    background: rgba(251, 59, 0, 0.2);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    height: 40px;
+}
+
+.botao-endereco{
+    background: none;
+    outline: none;
+    border: none;
+    color:  rgba(170, 50, 15, 1);
+    font-weight: bolder;
+    cursor: pointer;
+    text-decoration-line: underline;
+    font-weight: bold;
+}

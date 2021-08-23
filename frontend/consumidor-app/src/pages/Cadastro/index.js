@@ -22,10 +22,26 @@ function Cadastro() {
     const history = useHistory();
 
     async function onSubmit(data) {
-        if (!data.email || !data.senha || !data.telefone || !data.senha || !data.confirmarSenha) {
-            toast.error('Todos os campos são obrigatórios!', toastConfig);
+        if (!data.nome) {
+            toast.error('O nome é obrigatório!', toastConfig);
             return;
         }
+
+        if (!data.email) {
+            toast.error('O email é obrigatório!', toastConfig);
+            return;
+        }
+
+        if ( !data.senha ) {
+            toast.error('A senha é obrigatória!', toastConfig);
+            return;
+        }
+
+        if (!data.telefone) {
+            toast.error('O telefone é obrigatório!', toastConfig);
+            return;
+        }
+
 
         if (data.senha !== data.confirmarSenha) {
             toast.error('As senhas não correspodem.', toastConfig);
