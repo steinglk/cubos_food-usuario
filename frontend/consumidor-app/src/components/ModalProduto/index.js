@@ -8,6 +8,7 @@ import menos from '../../assets/menos.svg'
 
 function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola}) {
     const [contador, setContador] = useState(0);
+    console.log(dadosProduto);
     function handleContador(soma) {
         const validarSoma = contador + soma;
         if(validarSoma < 0 ) return;
