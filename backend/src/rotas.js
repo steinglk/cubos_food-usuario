@@ -15,7 +15,7 @@ rotas.use(verificarLogin.verificarLogin);
 
 rotas.post('/adicionarEndereco', cliente.adicionarEndereco);
 
-rotas.get('/verificarEndereco/:id', cliente.verificarEndereco);
+rotas.get('/verificarEndereco', cliente.verificarEndereco);
 
 rotas.get('/restaurantes', restaurantes.listarRestaurantes);
 

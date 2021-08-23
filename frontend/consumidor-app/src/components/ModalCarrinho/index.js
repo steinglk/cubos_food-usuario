@@ -6,6 +6,20 @@ import { set } from 'react-hook-form';
 
 function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeRestaurante}){
     const [preco, setPreco] = useState(0);
+    const [endereco, setEndereco] = useState('');
+
+    async function handleEndereco() {
+        const resposta = await fetch('http://localhost:8001/verificarEndereco',{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
+            }
+        });
+
+        const retorno = await resposta.json();
+
+        setEndereco(retorno);
+    }
 
     useEffect(() => {
         let atualizarPreco = 0
@@ -13,6 +27,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
             atualizarPreco = atualizarPreco + (produto.valor_produto * produto.quantidade),
             setPreco(atualizarPreco)
         ))
+        handleEndereco()
     }, [novosProdutos]);
 
     async function realizarCompra() {
@@ -41,8 +56,16 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                             <h1>{nomeRestaurante}</h1>
                         </div>
                         <div className='enderecoModal'>
-                            <span className='span-endereco'>Endereço de Entrega: </span>
-                            <span className='span-endereco2'>Av. Tancredo Neves, 2227, ed. Salvador Prime, sala 901:906; 917:920 - Caminho das Árvores, Salvador - BA, 41820-021.</span>
+                            {endereco ? 
+                            (<div>
+                                <span className='span-endereco'>Endereço de Entrega: </span>
+                                <span className='span-endereco2'> {endereco.endereco}, {endereco.complemento}, {endereco.cep}.
+                                </span>
+                            </div>) :
+                            (<div className='adicionar-endereco'> 
+                                <button className='botao-endereco'>Adicionar endereço</button>
+                            </div>)
+                        }
                         </div>
 
                         <div>
