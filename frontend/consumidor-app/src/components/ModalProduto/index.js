@@ -11,7 +11,6 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola}) {
     function handleContador(soma) {
         const validarSoma = contador + soma;
         if(validarSoma < 0 ) return;
-
         setContador(contador + soma);
     }
 
@@ -20,10 +19,8 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola}) {
         nome_produto: dadosProduto.nome,
         imagem_produto: dadosProduto.imagem_produto,
         quantidade: contador,
-        valor_produto: dadosProduto.preco,
+        valor_produto: dadosProduto.preco
     }
-
-    console.log(dadosPedido);
 
     return (
         <div className="modal">
@@ -42,7 +39,7 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola}) {
                     </div>
                     <div className="flex-row space-around mx-lg my-lg">
                         <p>{dadosProduto.descricao}</p>
-                        <span className='span-valor'>{dadosProduto.preco/10}</span> 
+                        <span className='span-valor'>{dadosProduto.preco/100}</span> 
                     </div>
                     <div className="flex-row space-around items-center">
                         <div className="flex-row contador">

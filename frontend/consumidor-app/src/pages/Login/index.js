@@ -33,7 +33,7 @@ function Login() {
             }
         });
 
-        const {token, cliente} = await resposta.json();
+        const {token} = await resposta.json();
 
         if (!token) {
             toast.error('E-mail e/ou senha incorretos!', toastConfig);

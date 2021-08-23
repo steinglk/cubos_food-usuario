@@ -5,18 +5,15 @@ import { useEffect, useContext } from 'react';
 import pizza from '../../assets/pizarria.png';
 import bg from '../../assets/bg-restaurante.svg';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../../routes';
 
 function Restaurantes() { 
     const [restaurantes, setRestaurantes] = useState([]);
     const [header, setHeader] = useState('');
     const [nome, setNome] = useState('');
-    const [abrirPerfil, setAbrirPerfil] = useState(false);
     const [perfil, setPerfil] = useState('');
     const [filtro, setFiltro] = useState('');
     const [existe, setExiste] = useState(true);
     const history = useHistory();
-    const { idRestaurante } = useContext(AuthContext);
 
     function cardapio(id) {
         history.push(`/restaurante/${id}`);
@@ -31,7 +28,6 @@ function Restaurantes() {
         });
 
         const restaurantesRetornados = await resposta.json();
-        console.log(restaurantesRetornados)
         setRestaurantes(restaurantesRetornados);
     }
     useEffect(() => {
@@ -61,9 +57,6 @@ function Restaurantes() {
         window.location.reload();
     }
 
-    function openModalPerfil(){
-        setAbrirPerfil(true);
-    }
     
     function filtrarRestaurante(e) {
         setFiltro(e);

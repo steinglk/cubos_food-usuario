@@ -13,6 +13,10 @@ rotas.post('/', login.logarCliente);
 
 rotas.use(verificarLogin.verificarLogin);
 
+rotas.post('/adicionarEndereco', cliente.adicionarEndereco);
+
+rotas.get('/verificarEndereco/:id', cliente.verificarEndereco);
+
 rotas.get('/restaurantes', restaurantes.listarRestaurantes);
 
 rotas.get('/:id/produtos', produtos.produtosAtivos );
