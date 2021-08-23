@@ -38,13 +38,13 @@ const cadastrarCliente = async (req, res) => {
 
 const adicionarEndereco = async (req, res) => {
     const {
-        cliente_id,
         cep,
         endereco,
         complemento,
     } = req.body;
+    const cliente_id = req.usuario.id;
 
-    if (!cliente_id || !cep || !endereco || !complemento) {
+    if (!cliente_id || !cep || !endereco) {
         return res.status(400).json("Todos os campos são obrigatórios");
     }
 
