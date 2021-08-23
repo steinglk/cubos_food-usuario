@@ -1,11 +1,22 @@
 import './style.css';
 import Carrinho from '../../assets/carrinho.svg';
 import semProdutos from '../../assets/semProdutos.svg'
+import { useState, useEffect } from 'react';
+import { set } from 'react-hook-form';
 
-function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  nomeRestaurante}){
-    
+function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeRestaurante}){
+    const [preco, setPreco] = useState(0);
+
+    useEffect(() => {
+        let atualizarPreco = 0
+        novosProdutos.map(produto => (
+            atualizarPreco = atualizarPreco + (produto.valor_produto * produto.quantidade),
+            setPreco(atualizarPreco)
+        ))
+    }, [novosProdutos]);
+
     async function realizarCompra() {
-        novosProdutos.preco = (price+parseInt(novosProdutos[0].restaurante_taxa))
+        novosProdutos.preco = preco
         console.log(novosProdutos)
         const resposta = await fetch(`http://localhost:8001/produtos`, {
             method: 'PUT',
@@ -63,7 +74,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  no
                                     <div className='rodapeModal'>
                                         <div className='subTotal marginRodape flex-row space-between'>
                                             <span>Subtotal</span>
-                                            <span className='rodapeWeight fontRodape'>R$ {price/100}</span>
+                                            <span className='rodapeWeight fontRodape'>R$ {preco/100}</span>
                                         </div>
                                         <div className='taxa marginRodape flex-row space-between'>
                                             <span>Taxa de entrega</span>
@@ -71,7 +82,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos, price,  no
                                         </div>
                                         <div className='total marginRodape flex-row space-between'>
                                             <span>Total</span>
-                                            <span className='rodapeWeight fontValor'>R$ {(price+parseInt(novosProdutos[0].restaurante_taxa))/100}</span>
+                                            <span className='rodapeWeight fontValor'>R$ {(preco+parseInt(novosProdutos[0].restaurante_taxa))/100}</span>
                                         </div>
                                     </div>
                                     <div className='flex-row space-around'>

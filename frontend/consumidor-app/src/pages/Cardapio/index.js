@@ -22,7 +22,6 @@ function Cardapio() {
     const [abrirCarrinho, setAbrirCarrinho] = useState(false);
     const {params} = useRouteMatch();
     const [novosProdutos, setNovosProdutos] = useState([])
-    const [price, setPrice] = useState(0);
 
     async function carregarProdutos() {
         const resposta = await fetch(`http://localhost:8001/${params.id}/produtos`, {
@@ -67,16 +66,13 @@ function Cardapio() {
 /* Adicionar produtos a sacola */
 
     function handleBag(novoProduto) {
-        let salvarCarrinho = localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho')) : []
-        let salvarPreco = localStorage.getItem('@usuario/carrinho/preco') ? parseInt(localStorage.getItem('@usuario/carrinho/preco')) : '' 
+        let salvarCarrinho = localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho')) : [] 
 
         novoProduto.restaurante_id = parseInt(params.id);
         novoProduto.restaurante_nome = restaurante.nome;
         novoProduto.restaurante_taxa = restaurante.taxa_entrega;
         novoProduto.tempoEntrega = restaurante.tempo_entrega_minutos;
         
-        const newProdutos = [... novosProdutos];
-        const isInBag = newProdutos.find(p => p.id === novoProduto.id);
 
         if(salvarCarrinho.length){
             const verificarRestaurante = [... salvarCarrinho];
@@ -93,8 +89,8 @@ function Cardapio() {
             return
         }
 
-        salvarPreco = salvarPreco + (novoProduto.valor_produto * novoProduto.quantidade);
-        localStorage.setItem('@usuario/carrinho/preco', salvarPreco);
+        const newProdutos = [... salvarCarrinho];
+        const isInBag = newProdutos.find(p => p.id === novoProduto.id);
 
         if(isInBag){
             isInBag.quantidade = isInBag.quantidade + novoProduto.quantidade;
@@ -106,14 +102,12 @@ function Cardapio() {
 
         setNovosProdutos([... novosProdutos, novoProduto]);
         salvarCarrinho.push(novoProduto)
-
         localStorage.setItem('@usuario/carrinho', JSON.stringify(salvarCarrinho));
     }
 
 
     function handleLogout() {
         localStorage.removeItem('@usuario/token');
-    
         window.location.reload();
     }
 
@@ -204,7 +198,6 @@ function Cardapio() {
             openCarrinho={abrirCarrinho} 
             novosProdutos={localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho')) : novosProdutos} 
             setNovosProdutos={setNovosProdutos}
-            price={parseInt(localStorage.getItem('@usuario/carrinho/preco'))}
             nomeRestaurante = {localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho'))[0].restaurante_nome : restaurante.nome }/>
         </div>
     );
