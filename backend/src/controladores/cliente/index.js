@@ -37,7 +37,8 @@ const cadastrarCliente = async (req, res) => {
 }
 
 const adicionarEndereco = async (req, res) => {
-    const {id} = req.usuario;
+    const { id } = req.cliente;
+
     const {
         cep,
         endereco,
@@ -51,7 +52,7 @@ const adicionarEndereco = async (req, res) => {
     try {
         const clienteExiste = await knex('cliente')
             .select('id')
-            .where({ id: cliente_id })
+            .where({ id: id })
             .first();
 
         if (!clienteExiste) {
@@ -60,12 +61,12 @@ const adicionarEndereco = async (req, res) => {
 
         const enderecoExiste = await knex('endereco_cliente')
             .select('id')
-            .where({ id: id })
+            .where({ cliente_id: id })
             .first();
 
         if (enderecoExiste) {
             const atualizandoEndereco = await knex('endereco_cliente')
-                .where({ id: id })
+                .where({ cliente_id: id })
                 .update({
                     cep,
                     endereco,
@@ -81,11 +82,12 @@ const adicionarEndereco = async (req, res) => {
 
         const cadastrandoEndereco = await knex('endereco_cliente')
             .insert({
-                id,
+                cliente_id: id,
                 cep,
                 endereco,
                 complemento,
             });
+
         if (cadastrandoEndereco.length === 0) {
             return res.status(400).json("Erro ao adicionar endereço!");
         }
@@ -97,7 +99,7 @@ const adicionarEndereco = async (req, res) => {
 
 const verificarEndereco = async (req, res) => {
     
-    const { id } = req.usuario;
+    const { id } = req.cliente;
 
     try {
         const enderecoEncontrado = await knex('endereco_cliente')

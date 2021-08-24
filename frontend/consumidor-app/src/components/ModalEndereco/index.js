@@ -36,8 +36,10 @@ function ModalEndereco ({open, setOpen}) {
         toast.error(retorno, toastConfig);
         return
     }
+
     return (
         <div>
+            {open &&
                 <div className='modal'>
                     <div className='modal-content-carrinho'>
                         <div className='fecharModal flex-row flex-end'>
@@ -72,6 +74,7 @@ function ModalEndereco ({open, setOpen}) {
                         </form>
                     </div>
                 </div>
+            }
         </div>
     )
 }

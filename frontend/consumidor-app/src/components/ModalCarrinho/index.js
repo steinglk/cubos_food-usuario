@@ -3,10 +3,12 @@ import Carrinho from '../../assets/carrinho.svg';
 import semProdutos from '../../assets/semProdutos.svg'
 import { useState, useEffect } from 'react';
 import semImagem from '../../assets/semImagem.png';
+import ModalEndereco from '../ModalEndereco';
 
 function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeRestaurante}){
     const [preco, setPreco] = useState(0);
     const [endereco, setEndereco] = useState('');
+    const [open, setOpen] = useState(false)
 
     async function handleEndereco() {
         const resposta = await fetch('http://localhost:8001/verificarEndereco',{
@@ -63,7 +65,8 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                                 </span>
                             </div>) :
                             (<div className='adicionar-endereco'> 
-                                <button className='botao-endereco'>Adicionar endereço</button>
+                                <button className='botao-endereco' onClick = {() => setOpen(true)}>Adicionar endereço</button>
+                                <ModalEndereco open={open} setOpen={setOpen}/>
                             </div>)
                         }
                         </div>
