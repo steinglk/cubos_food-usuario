@@ -5,16 +5,14 @@ import logo from '../../assets/logo.svg';
 import barril from '../../assets/Vector.png'
 import centroImg from '../../assets/cadastro-img.png'
 import detalhe from '../../assets/Group1627.svg'
-import {useContext, useEffect} from 'react';
+import { useEffect } from 'react';
 import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Link, useHistory} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import {toast} from 'react-toastify';
-import {AuthContext} from '../../routes';
 import toastConfig from '../../tools/toastConfig';
-
 
 function Cadastro() {
     const [showPassword, setShowPassword] = useState(false);
@@ -68,6 +66,11 @@ function Cadastro() {
 
         history.push('/');
     }
+
+    useEffect(() => {
+        localStorage.removeItem('@usuario/token');
+        localStorage.removeItem('@usuario/carrinho');
+    }, []);
 
     return (
         <div className='container-cadastro'>

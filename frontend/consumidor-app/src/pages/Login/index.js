@@ -51,6 +51,7 @@ function Login() {
 
     useEffect(() => {
         localStorage.removeItem('@usuario/token');
+        localStorage.removeItem('@usuario/carrinho');
     }, []);
 
     return (
