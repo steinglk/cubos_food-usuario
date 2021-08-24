@@ -154,7 +154,7 @@ function Cardapio() {
                                     
                                     <div onClick={()=> {setProdutoSelecionado(produto)
                                     setOpenProduto(true)}
-                                         }  className="div-card">
+                                    }  className="div-card">
                                     
                                     <div className="card-content flex-row">
                                         <div className='flex-column texto-card'>
@@ -182,7 +182,8 @@ function Cardapio() {
                                         setOpen={setProdutoSelecionado}
                                         sacola ={handleBag}
                                         dadosProduto={produtoSelecionado} 
-                                        dadosRestaurante={restaurante}/>}
+                                        dadosRestaurante={restaurante}
+                                        open={openProduto} />}
                             </div>
                     </div>
                     ) : 
