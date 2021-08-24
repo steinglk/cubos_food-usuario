@@ -10,6 +10,8 @@ import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Restaurantes from './pages/Restaurantes'
 import Cardapio from './pages/Cardapio';
+import ModalEndereco from './components/ModalEndereco'
+import ModalProduto from './components/ModalProduto';
 
 export const AuthContext = createContext();
 
@@ -37,6 +39,7 @@ function Routes() {
         <AuthContext.Provider value={{ token, logar, deslogar }}>
             <Router>
                 <Switch>
+                    <Route path="/dev" exact component={ModalEndereco} />
                     <Route path="/" exact component={Login} />
                     <Route path="/cadastro" component={Cadastro} />
                     <RotasProtegidas>
