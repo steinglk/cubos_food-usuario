@@ -4,7 +4,8 @@ import moneyicon from '../../assets/money-icon.svg';
 import tempoicon from '../../assets/tempo-icon.svg';
 import {useState} from 'react';
 import mais from '../../assets/mais.svg';
-import menos from '../../assets/menos.svg'
+import menos from '../../assets/menos.svg';
+import semImagem from '../../assets/semImagem.png';
 
 function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola}) {
     const [contador, setContador] = useState(0);
@@ -26,7 +27,7 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola}) {
         <div className="modal">
             <div className="modal-produto">
                 <img className="close-button"  onClick={() => setOpen(false)} src={mais}/>
-                <img className="img-modal" src={dadosProduto.imagem_produto} />
+                <img className="img-modal" src={dadosProduto.imagem_produto ? dadosProduto.imagem_produto : semImagem} />
                 <img className='imagem-produtos img-absolute' 
                 src={dadosRestaurante.imagem_restaurante} />
                 <div className="flex-column area-dados space-around">

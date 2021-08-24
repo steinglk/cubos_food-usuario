@@ -5,6 +5,7 @@ import { useEffect, useContext } from 'react';
 import pizza from '../../assets/pizarria.png';
 import bg from '../../assets/bg-restaurante.svg';
 import { useHistory } from 'react-router-dom';
+import perfilPadrao from '../../assets/sem-imagem-avatar.png' 
 
 function Restaurantes() { 
     const [restaurantes, setRestaurantes] = useState([]);
@@ -110,7 +111,7 @@ function Restaurantes() {
                                     </div>
                                     <div className='div-imagem-card'>
                                         <div > 
-                                            <img src={restaurante.imagem_restaurante} alt="imagem do produto" className='imagem-card' />
+                                            <img src={restaurante.imagem_restaurante ? restaurante.imagem_restaurante : perfilPadrao} alt="imagem do produto" className='imagem-card' />
                                         </div>
                                     </div>
                                 </div>

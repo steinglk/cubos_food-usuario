@@ -10,6 +10,7 @@ import ModalProduto from '../../components/ModalProduto';
 import ModalCarrinho from '../../components/ModalCarrinho';
 import {toast} from 'react-toastify';
 import toastConfig from '../../tools/toastConfig';
+import semImagem from '../../assets/semImagem.png';
 
 function Cardapio() {
     const [restaurante, setRestaurante] = useState({});
@@ -173,7 +174,7 @@ function Cardapio() {
                                         </div>
                                         <div className='div-imagem-card'>
                                             <div > 
-                                                <img src={produto.imagem_produto} alt="imagem do produto" className='imagem-card' />
+                                                <img src={produto.imagem_produto ? produto.imagem_produto : semImagem} alt="imagem do produto" className='imagem-card' />
                                             </div>
                                         </div>
                                     </div>

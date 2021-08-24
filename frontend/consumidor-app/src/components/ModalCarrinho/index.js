@@ -2,7 +2,7 @@ import './style.css';
 import Carrinho from '../../assets/carrinho.svg';
 import semProdutos from '../../assets/semProdutos.svg'
 import { useState, useEffect } from 'react';
-import { set } from 'react-hook-form';
+import semImagem from '../../assets/semImagem.png';
 
 function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeRestaurante}){
     const [preco, setPreco] = useState(0);
@@ -79,7 +79,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                                 <div>
                                     <div className='produtod-modal flex-row'>
                                         <div className='imagem-produto '>
-                                            <img src={produto.imagem_produto} className='imagem-carrinho'/>
+                                            <img src={produto.imagem_produto ? produto.imagem_produto : semImagem} className='imagem-carrinho'/>
                                         </div>
                                         <div className='infor-produtos flex-column space-around'>
                                             <span className='infor-nome'>{produto.nome_produto}</span>

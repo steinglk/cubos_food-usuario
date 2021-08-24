@@ -42,7 +42,6 @@ function Cadastro() {
             return;
         }
 
-
         if (data.senha !== data.confirmarSenha) {
             toast.error('As senhas não correspodem.', toastConfig);
             return;
