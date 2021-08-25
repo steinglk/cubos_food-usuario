@@ -18,9 +18,6 @@ function Cardapio() {
     const [openProduto, setOpenProduto] = useState(false);
     const [produtos, setProdutos] = useState([]);
     const [temProdutos, setTemProdutos] = useState(true)
-    const [abrirPerfil, setAbrirPerfil] = useState(false);
-    const [perfil, setPerfil] = useState('');
-    const [existe, setExiste] = useState(true);
     const [abrirCarrinho, setAbrirCarrinho] = useState(false);
     const {params} = useRouteMatch();
     const [novosProdutos, setNovosProdutos] = useState([])
@@ -57,11 +54,6 @@ function Cardapio() {
         
     }
 
-    function openModalPerfil(){
-        setAbrirCarrinho(true);
-    }
-
-
     useEffect(() => {
         carregarProdutos()
         carregarRestaurante();
@@ -76,8 +68,11 @@ function Cardapio() {
         novoProduto.restaurante_nome = restaurante.nome;
         novoProduto.restaurante_taxa = restaurante.taxa_entrega;
         novoProduto.tempoEntrega = restaurante.tempo_entrega_minutos;
-        
 
+        if(novoProduto.deletado){
+            return;
+        }
+        
         if(salvarCarrinho.length){
             const verificarRestaurante = [... salvarCarrinho];
             const mesmoRestaurante = verificarRestaurante.find(id => id.restaurante_id === novoProduto.restaurante_id);
@@ -104,7 +99,6 @@ function Cardapio() {
             return;
         }
 
-        setNovosProdutos([... novosProdutos, novoProduto]);
         salvarCarrinho.push(novoProduto)
         localStorage.setItem('@usuario/carrinho', JSON.stringify(salvarCarrinho));
     }
@@ -188,7 +182,9 @@ function Cardapio() {
                                         sacola ={handleBag}
                                         dadosProduto={produtoSelecionado} 
                                         dadosRestaurante={restaurante}
-                                        open={openProduto} />}
+                                        open={openProduto} 
+                                        noCarrinho={false}
+                                        />}
                             </div>
                     </div>
                     ) : 
@@ -206,7 +202,10 @@ function Cardapio() {
             openCarrinho={abrirCarrinho} 
             novosProdutos={localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho')) : novosProdutos} 
             setNovosProdutos={setNovosProdutos}
-            nomeRestaurante = {localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho'))[0].restaurante_nome : restaurante.nome }/>
+            nomeRestaurante = {localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho'))[0].restaurante_nome : restaurante.nome }
+            restaurante = {restaurante}
+            sacola ={handleBag}
+            />
         </div>
     );
 }

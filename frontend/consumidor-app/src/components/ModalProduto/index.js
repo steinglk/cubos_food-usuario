@@ -6,9 +6,13 @@ import mais from '../../assets/mais.svg';
 import menos from '../../assets/menos.svg';
 import semImagem from '../../assets/semImagem.png';
 
-function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open}) {
+function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, noCarrinho}) {
     const [contador, setContador] = useState(0);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> hml
     function handleContador(soma) {
         const validarSoma = contador + soma;
         if(validarSoma < 0 ) return;
@@ -20,7 +24,8 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open}) {
         nome_produto: dadosProduto.nome,
         imagem_produto: dadosProduto.imagem_produto,
         quantidade: contador,
-        valor_produto: dadosProduto.preco
+        valor_produto: dadosProduto.preco,
+        descricao: dadosProduto.descricao
     }
 
     return (
@@ -33,24 +38,30 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open}) {
                     <img className='imagem-produtos img-absolute' 
                     src={dadosRestaurante.imagem_restaurante} />
                     <div className="flex-column area-dados space-around">
-                        <h1>{dadosProduto.nome}</h1>
+                        <h1>{dadosProduto.nome ? dadosProduto.nome : dadosProduto.nome_produto}</h1>
                         <div className="flex-row space-around mx-lg">
                             <img src={moneyicon} />
-                            <p className="bold">Pedido Mínimo: <span className="normal-weight">{dadosRestaurante.valor_minimo_pedido}</span></p>
+                            <p className="bold">Pedido Mínimo: R$ <span className="normal-weight">{dadosRestaurante.valor_minimo_pedido/100}</span></p>
                             <img src={tempoicon} />
-                            <p className="bold" >Tempo de entrega: <span className="normal-weight">{dadosRestaurante.taxa_entrega}</span></p>
+                            <p className="bold" >Tempo de entrega: <span className="normal-weight">{dadosRestaurante.taxa_entrega} minutos</span></p>
                         </div>
                         <div className="flex-row space-around mx-lg my-lg">
                             <p>{dadosProduto.descricao}</p>
-                            <span className='span-valor'>{dadosProduto.preco/100}</span> 
+                            <span className='span-valor'> R$ {dadosProduto.preco ? dadosProduto.preco/100 : dadosProduto.valor_produto/100}</span> 
                         </div>
-                        <div className="flex-row space-around items-center">
-                            <div className="flex-row contador">
-                                <button className="btn-orange-left" onClick={() => handleContador(-1)}><img src={menos} /></button>
-                                <p >{contador}</p>
-                                <button className="btn-orange-right" onClick={() => handleContador(1)}><img src={mais} /></button>
-                            </div>
-                            <button className="btn-orange mb-lg" onClick={() => sacola(dadosPedido)}>Adicionar produto ao carrinho</button>
+                        <div>
+                            {!noCarrinho ? 
+                                (<div className="flex-row space-around items-center">
+                                    <div className="flex-row contador">
+                                        <button className="btn-orange-left" onClick={() => handleContador(-1)}><img src={menos} /></button>
+                                        <p >{contador}</p>
+                                        <button className="btn-orange-right" onClick={() => handleContador(1)}><img src={mais} /></button>
+                                    </div>
+                                    <button className="btn-orange mb-lg" onClick={() => sacola(dadosPedido)}>Adicionar produto ao carrinho</button>
+                                </div>) 
+                                :
+                                (<div></div>)
+                            }
                         </div>
                     </div>
                 </div>

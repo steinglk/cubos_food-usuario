@@ -77,3 +77,20 @@
     font-weight: 600;
     margin-left: 45px;
 }
+
+.btn-orange-carrinho{
+    margin-left: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    
+}
+
+.imagem-deletar{
+    width: 30px;
+    height: 30px;
+}
+
+.btn-deletar{
+    margin-left: 45px;
+}

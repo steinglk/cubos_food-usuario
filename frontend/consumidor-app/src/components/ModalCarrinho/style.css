@@ -59,6 +59,7 @@
 .imagem-produto{
     width: 22%;
     margin-right: 2%;
+    cursor: pointer;
 }
 
 .infor-produtos{
@@ -125,4 +126,9 @@
     cursor: pointer;
     text-decoration-line: underline;
     font-weight: bold;
+}
+
+.margem-esquerda{
+    margin-left: 30%;
+    color: gray;
 }
