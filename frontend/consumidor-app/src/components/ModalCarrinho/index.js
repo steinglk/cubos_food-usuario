@@ -34,9 +34,13 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
 
     async function realizarCompra() {
         novosProdutos.preco = preco
+        const pedido = {
+            produtos: novosProdutos,
+            
+        }
         console.log(novosProdutos)
-        const resposta = await fetch(`http://localhost:8001/produtos`, {
-            method: 'PUT',
+        const resposta = await fetch(`http://localhost:8001/pedidos`, {
+            method: 'POST',
             body: JSON.stringify(novosProdutos),
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
@@ -58,16 +62,16 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                             <h1>{nomeRestaurante}</h1>
                         </div>
                         <div className='enderecoModal'>
-                            {endereco ? 
+                            {endereco === "" ? 
+                            (<div className='adicionar-endereco'> 
+                            <button className='botao-endereco' onClick = {() => setOpen(true)}>Adicionar endereço</button>
+                            <ModalEndereco open={open} setOpen={setOpen}/>
+                        </div>) :
                             (<div>
                                 <span className='span-endereco'>Endereço de Entrega: </span>
                                 <span className='span-endereco2'> {endereco.endereco}, {endereco.complemento}, {endereco.cep}.
                                 </span>
-                            </div>) :
-                            (<div className='adicionar-endereco'> 
-                                <button className='botao-endereco' onClick = {() => setOpen(true)}>Adicionar endereço</button>
-                                <ModalEndereco open={open} setOpen={setOpen}/>
-                            </div>)
+                            </div>) 
                         }
                         </div>
 

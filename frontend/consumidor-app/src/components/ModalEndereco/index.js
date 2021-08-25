@@ -1,5 +1,6 @@
 import './styles.css';
 import Carrinho from '../../assets/carrinho.svg';
+import Checked from '../../assets/checked.svg'
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {toast} from 'react-toastify';
@@ -7,6 +8,7 @@ import toastConfig from '../../tools/toastConfig';
 
 function ModalEndereco ({open, setOpen}) {
     const {register, handleSubmit} = useForm();
+    const [estadoEndereco, setEstadoEndereco] = useState('cadastro');
 
     async function onSubmit(data) {
         console.log(data);
@@ -30,7 +32,7 @@ function ModalEndereco ({open, setOpen}) {
 
         if(retorno === 'Endereço adicionado com sucesso') {
             toast.success('Endereço adicionado com sucesso', toastConfig);
-            setOpen(false);
+            setEstadoEndereco('sucesso');
             return
         }
         toast.error(retorno, toastConfig);
@@ -43,12 +45,16 @@ function ModalEndereco ({open, setOpen}) {
                 <div className='modal'>
                     <div className='modal-content-carrinho'>
                         <div className='fecharModal flex-row flex-end'>
-                            <button className='btn-fechar' onClick={() => setOpen(false)}>X</button>
+                            <button className='btn-fechar' 
+                            onClick={() => setOpen(false)}>X</button>
                         </div>
                         <div className='h1-endereco flex-row '>
-                            <img src={Carrinho} className='margem-carrinho' />
+                            <img alt="icone de carrinho" 
+                            src={Carrinho} 
+                            className='margem-carrinho' />
                             <h1 className="h1-endereco">Adicionar endereço</h1>
                         </div>
+                        {estadoEndereco === 'cadastro' &&
                         <form className="flex-column" 
                             onSubmit={handleSubmit(onSubmit)}>
                             <div className="flex-column mt">
@@ -70,8 +76,18 @@ function ModalEndereco ({open, setOpen}) {
                                 <input className='input-endereco' id="complemento"
                                     {...register('complemento')} />
                             </div>
+                            {}
                             <button type="submit" className="btn-orange width-endereco">Adicionar Endereço</button>
-                        </form>
+                        </form>}
+                        {estadoEndereco === 'sucesso' && 
+                            <div>
+                                <img alt="Icone de sucesso" src={Checked}></img>
+                                <p>Endereço cadastrado com sucesso</p>
+                                <button onClick={() => setOpen(false)} 
+                                className="btn-orange width-endereco">Voltar ao carrinho</button>
+                            </div>
+                        }
+                        
                     </div>
                 </div>
             }

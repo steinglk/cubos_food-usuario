@@ -22,7 +22,7 @@ rotas.get('/restaurantes', restaurantes.listarRestaurantes);
 
 rotas.get('/:id/produtos', produtos.produtosAtivos);
 
-rotas.post('/produtos', pedidos.adicionarPedido);
+rotas.post('/pedidos', pedidos.adicionarPedido);
 
 rotas.get('/restaurante/:id', restaurantes.listarUmRestaurante);
 
