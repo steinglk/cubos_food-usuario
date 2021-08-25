@@ -8,11 +8,7 @@ import semImagem from '../../assets/semImagem.png';
 
 function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, noCarrinho}) {
     const [contador, setContador] = useState(0);
-<<<<<<< HEAD
     
-=======
-
->>>>>>> hml
     function handleContador(soma) {
         const validarSoma = contador + soma;
         if(validarSoma < 0 ) return;
