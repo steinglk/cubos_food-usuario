@@ -11,6 +11,7 @@ import ModalCarrinho from '../../components/ModalCarrinho';
 import {toast} from 'react-toastify';
 import toastConfig from '../../tools/toastConfig';
 import semImagem from '../../assets/semImagem.png';
+import { useHistory } from 'react-router';
 
 function Cardapio() {
     const [restaurante, setRestaurante] = useState({});
@@ -24,6 +25,7 @@ function Cardapio() {
     const {params} = useRouteMatch();
     const [novosProdutos, setNovosProdutos] = useState([])
     const [produtoSelecionado, setProdutoSelecionado] = useState({})
+    const history = useHistory();
 
     async function carregarProdutos() {
         const resposta = await fetch(`http://localhost:8001/${params.id}/produtos`, {
@@ -113,6 +115,9 @@ function Cardapio() {
         window.location.reload();
     }
 
+    function voltarRestaurantes() {
+        history.push('/restaurantes');
+    }
     return (
         <div>
             <div className='flex-row background-produtos container-background' style={{backgroundImage: `url(${restaurante.categoria})`}}>
@@ -123,10 +128,10 @@ function Cardapio() {
                 <img className='imagem-perfil img-absolute' 
                 src={restaurante.imagem_restaurante} />
             </div>
-
             <div className='flex-row revisar'>
                 <button className='btn-orange' onClick={() => setAbrirCarrinho(true)}>Revisar pedido</button>
             </div>
+            <div><button onClick={() => voltarRestaurantes()} className="btn-orange voltar">Voltar</button></div>
 
             <div className='flex-row space-around infor-margem'>
                 <div className='flex-row items-center'>
