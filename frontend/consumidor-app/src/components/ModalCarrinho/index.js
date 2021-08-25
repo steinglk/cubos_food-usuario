@@ -4,11 +4,68 @@ import semProdutos from '../../assets/semProdutos.svg'
 import { useState, useEffect } from 'react';
 import semImagem from '../../assets/semImagem.png';
 import ModalEndereco from '../ModalEndereco';
+import ModalProduto from '../ModalProduto';
+import mais from '../../assets/mais.svg';
+import menos from '../../assets/menos.svg';
+import deletar from '../../assets/delete.png';
 
-function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeRestaurante}){
+function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeRestaurante, restaurante, setNovosProdutos, sacola,}){
     const [preco, setPreco] = useState(0);
     const [endereco, setEndereco] = useState('');
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [produtoSelecionado, setProdutoSelecionado] = useState({});
+    const [openProduto, setOpenProduto] = useState(false);
+    const [vazio, setVazio] = useState(false);
+
+    function handleAdd(produto) {
+        let salvarCarrinho = localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho')) : [] 
+        
+        const newProdutos = [... salvarCarrinho];
+        let isInBag = newProdutos.find(p => p.id === produto.id);
+        
+        isInBag = isInBag.quantidade++;  
+        setNovosProdutos(newProdutos);
+        salvarCarrinho = newProdutos;
+        localStorage.setItem('@usuario/carrinho', JSON.stringify(salvarCarrinho));
+    }
+
+    function handleSub(produto) {
+        let salvarCarrinho = localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho')) : [];
+
+        const newProdutos = [... salvarCarrinho];
+        let isInBag = newProdutos.find(p => p.id === produto.id);
+        if (isInBag.quantidade === 1) return
+        isInBag = isInBag.quantidade--;  
+        setNovosProdutos(newProdutos);
+        salvarCarrinho = newProdutos;
+        localStorage.setItem('@usuario/carrinho', JSON.stringify(salvarCarrinho));
+    }
+
+    function handleDelete(produto) {
+        let salvarCarrinho = localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho')) : [];
+
+        const newProdutos = [... salvarCarrinho];
+        let isInBag = newProdutos.findIndex(p => p.id === produto.id);
+
+        if(!newProdutos){
+            return
+        }
+
+        if(newProdutos.length === 1){
+            localStorage.removeItem('@usuario/carrinho');
+            setVazio(true);
+            sacola({
+                deletado: true
+            });
+            setNovosProdutos([]);
+            return
+        }
+
+        newProdutos.splice(isInBag, 1);  
+        setNovosProdutos(newProdutos);
+        salvarCarrinho = newProdutos;
+        localStorage.setItem('@usuario/carrinho', JSON.stringify(salvarCarrinho));
+    }
 
     async function handleEndereco() {
         const resposta = await fetch('http://localhost:8001/verificarEndereco',{
@@ -25,6 +82,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
 
     useEffect(() => {
         let atualizarPreco = 0
+        setVazio(false);
         novosProdutos.map(produto => (
             atualizarPreco = atualizarPreco + (produto.valor_produto * produto.quantidade),
             setPreco(atualizarPreco)
@@ -33,8 +91,8 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
     }, [novosProdutos]);
 
     async function realizarCompra() {
-        novosProdutos.preco = preco
-        console.log(novosProdutos)
+        novosProdutos.preco = preco + novosProdutos[0].restaurante_taxa;
+        console.log(novosProdutos);
         const resposta = await fetch(`http://localhost:8001/produtos`, {
             method: 'PUT',
             body: JSON.stringify(novosProdutos),
@@ -42,6 +100,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                 'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
             }
         });
+
         const produtos = await resposta.json();
     }
     
@@ -72,16 +131,17 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                         </div>
 
                         <div>
-                            {novosProdutos.length ?  
+                            {novosProdutos.length && !vazio ?  
                                 (<div>
                                     <div className='tempoEntregaModal'>
                                 <span>Tempo de Entrega: </span>
                                 <span className='span-tempo'>{novosProdutos[0].tempoEntrega} minutos.</span>
-                            </div>
+                                </div>
                             {novosProdutos.map(produto => (
                                 <div>
-                                    <div className='produtod-modal flex-row'>
-                                        <div className='imagem-produto '>
+                                    <div className='produto-modal flex-row'>
+                                        <div className='imagem-produto ' onClick={()=> {setProdutoSelecionado(produto)
+                                        setOpenProduto(true)}}>
                                             <img src={produto.imagem_produto ? produto.imagem_produto : semImagem} className='imagem-carrinho'/>
                                         </div>
                                         <div className='infor-produtos flex-column space-around'>
@@ -89,8 +149,22 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                                             <span>{produto.quantidade} unidade(s)</span>
                                             <span className='infor-valor'>R$ {produto.valor_produto/100}</span>
                                         </div>
+                                       
+                                        <div className="flex-row content-center items-center  margem-esquerda">
+                                            <button className="btn-orange-left btn-orange-carrinho flex-row content-center items-center " onClick={() => handleSub(produto)}><img src={menos} /></button>
+                                            <button className="btn-orange-right btn-orange-carrinho flex-row content-center items-center " onClick={() => handleAdd(produto)}><img src={mais} /></button>
+                                            <div className='btn-deletar-margem'>
+                                                <button className="btn-orange-right btn-orange-carrinho flex-row content-center items-center btn-deletar" onClick={() => handleDelete(produto)}><img className='imagem-deletar' src={deletar} /></button>
+                                            </div>
+                                        </div>
+                                       
+                                        {produtoSelecionado && <ModalProduto 
+                                        setOpen={setProdutoSelecionado}
+                                        dadosProduto={produtoSelecionado} 
+                                        dadosRestaurante={restaurante}
+                                        open={openProduto} 
+                                        noCarrinho={true}/>}
                                     </div>
-                                    
                                 </div>
                                 ))}
 
