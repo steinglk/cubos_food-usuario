@@ -4,11 +4,13 @@ import semProdutos from '../../assets/semProdutos.svg'
 import { useState, useEffect } from 'react';
 import semImagem from '../../assets/semImagem.png';
 import ModalEndereco from '../ModalEndereco';
+import { useRouteMatch } from "react-router-dom";
 
 function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeRestaurante}){
     const [preco, setPreco] = useState(0);
-    const [endereco, setEndereco] = useState('');
+    const [endereco, setEndereco] = useState();
     const [open, setOpen] = useState(false)
+    const {params} = useRouteMatch();
 
     async function handleEndereco() {
         const resposta = await fetch('http://localhost:8001/verificarEndereco',{
@@ -33,16 +35,18 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
     }, [novosProdutos]);
 
     async function realizarCompra() {
-        novosProdutos.preco = preco
         const pedido = {
             produtos: novosProdutos,
-            
+            subtotal: preco,
+            endereco: endereco,
+            entrega: novosProdutos[0].restaurante_taxa
         }
-        console.log(novosProdutos)
+        console.log(JSON.stringify(pedido))
         const resposta = await fetch(`http://localhost:8001/pedidos`, {
             method: 'POST',
-            body: JSON.stringify(novosProdutos),
+            body: JSON.stringify(pedido),
             headers: {
+                'Content-type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('@usuario/token')}`
             }
         });
@@ -62,16 +66,16 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                             <h1>{nomeRestaurante}</h1>
                         </div>
                         <div className='enderecoModal'>
-                            {endereco === "" ? 
-                            (<div className='adicionar-endereco'> 
-                            <button className='botao-endereco' onClick = {() => setOpen(true)}>Adicionar endereço</button>
-                            <ModalEndereco open={open} setOpen={setOpen}/>
-                        </div>) :
+                            {endereco ? 
                             (<div>
                                 <span className='span-endereco'>Endereço de Entrega: </span>
                                 <span className='span-endereco2'> {endereco.endereco}, {endereco.complemento}, {endereco.cep}.
                                 </span>
                             </div>) 
+                            : (<div className='adicionar-endereco'> 
+                            <button className='botao-endereco' onClick = {() => setOpen(true)}>Adicionar endereço</button>
+                            <ModalEndereco open={open} setOpen={setOpen}/>
+                        </div>)
                         }
                         </div>
 

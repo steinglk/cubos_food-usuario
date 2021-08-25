@@ -7,7 +7,7 @@ const produtosAtivos = async (req, res) => {
         listaProdutos = await knex('produto').where({restaurante_id, ativo: true});
         return res.status(200).json(listaProdutos);
     } catch (error) {
-        
+        return res.status(400).json(error.message)
     }
 }
 

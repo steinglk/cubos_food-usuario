@@ -11,7 +11,7 @@ import Cadastro from './pages/Cadastro';
 import Restaurantes from './pages/Restaurantes'
 import Cardapio from './pages/Cardapio';
 import ModalEndereco from './components/ModalEndereco'
-import ModalProduto from './components/ModalProduto';
+
 
 export const AuthContext = createContext();
 

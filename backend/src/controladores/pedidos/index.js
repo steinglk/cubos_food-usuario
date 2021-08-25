@@ -2,10 +2,10 @@ const knex = require('../../conexao');
 
 const adicionarPedido = async (req, res) => {
 
-    const { produtos } = req.body;
+    const { produtos, endereco, subtotal, entrega } = req.body;
     const { id } = req.cliente;
-
-    if (produtos.length === 0) {
+    console.log(req.body)
+    if (!produtos) {
         return res.status(404).json('Adicione pelo menos 1 produto ao pedido.');
     }
 
@@ -14,10 +14,12 @@ const adicionarPedido = async (req, res) => {
         const inserindoPedido = await knex('pedido').insert({
             cliente_id: id,
             restaurante_id: produtos[0].restaurante_id,
-            endereco_id: produtos[0].endereco_id,
-            subtotal: produtos[0].subtotal,
-            total: produtos[0].total,
-            entrega: produtos[0].restaurante_taxa
+            cep: endereco.cep,
+            endereco: endereco.endereco,
+            complemento: endereco.complemento,
+            subtotal: subtotal,
+            total: (subtotal + entrega),
+            entrega: entrega
         }).returning('*');
 
         if (!inserindoPedido) {
@@ -35,7 +37,6 @@ const adicionarPedido = async (req, res) => {
             if (!inserindoProdutos) {
                 return res.status(404).json('Os itens não foram adicionados ao pedido.');
             }
-
         }
 
         return res.status(200).json(`Pedido cadastrado com sucesso!`);

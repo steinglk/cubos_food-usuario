@@ -80,7 +80,7 @@ function ModalEndereco ({open, setOpen}) {
                             <button type="submit" className="btn-orange width-endereco">Adicionar Endereço</button>
                         </form>}
                         {estadoEndereco === 'sucesso' && 
-                            <div>
+                            <div className="content-center">
                                 <img alt="Icone de sucesso" src={Checked}></img>
                                 <p>Endereço cadastrado com sucesso</p>
                                 <button onClick={() => setOpen(false)} 
