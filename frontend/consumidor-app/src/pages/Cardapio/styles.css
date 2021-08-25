@@ -164,3 +164,8 @@ linear-gradient(0deg, #FFFFFF, #FFFFFF);
 .distancia{
     margin-bottom: 20%;
 }
+
+.voltar {
+    position: absolute;
+    left: 7rem;
+}
