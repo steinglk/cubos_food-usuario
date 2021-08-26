@@ -26,3 +26,7 @@
 .flex-end{
     justify-content: flex-end;
 }
+
+.content-between{
+    align-content: space-between;
+}

@@ -205,6 +205,7 @@ function Cardapio() {
             nomeRestaurante = {localStorage.getItem('@usuario/carrinho') ? JSON.parse(localStorage.getItem('@usuario/carrinho'))[0].restaurante_nome : restaurante.nome }
             restaurante = {restaurante}
             sacola ={handleBag}
+            setComprado={false}
             />
         </div>
     );

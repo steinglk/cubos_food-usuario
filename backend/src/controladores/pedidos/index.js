@@ -1,7 +1,6 @@
 const knex = require('../../conexao');
 
 const adicionarPedido = async (req, res) => {
-
     const { produtos, endereco, subtotal, entrega } = req.body;
     const { id } = req.cliente;
     console.log(req.body)
