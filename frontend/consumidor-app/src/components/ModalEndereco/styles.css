@@ -75,3 +75,9 @@
     color: rgba(18, 18, 18, 0.8);
     margin-left: 2rem;
 }
+
+.sucesso-endereco {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

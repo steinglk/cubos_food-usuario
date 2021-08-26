@@ -138,12 +138,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                             <img src={Carrinho} className='margem-carrinho' />
                             <h1>{nomeRestaurante}</h1>
                         </div>
-                        <div> 
-                            {!comprado ? 
-                            (
-                                <div>
-                                        <div className='enderecoModal'>
-                                {endereco ? 
+                        {endereco ? 
                                 (<div>
                                     <span className='span-endereco'>Endereço de Entrega: </span>
                                     <span className='span-endereco2'> {endereco.endereco}, {endereco.complemento}, {endereco.cep}.
@@ -154,6 +149,13 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                                     <ModalEndereco open={open} setOpen={setOpen}/>
                                 </div>)
                             }
+                        <div> 
+                        
+                            {!comprado ? 
+                            (
+                                <div>
+                                        <div className='enderecoModal'>
+                                        
                             </div>
 
                             <div>
@@ -217,6 +219,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                                             </div>) 
                                             : 
                                         (<div className='semProduto flex-column items-center content-center'>
+                                            
                                             <img src={semProdutos} className='distancia'/>
                                             <span>Sem itens no carrinho</span>
                                         </div>)
