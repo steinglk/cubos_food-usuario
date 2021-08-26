@@ -23,6 +23,8 @@ function Cardapio() {
     const [novosProdutos, setNovosProdutos] = useState([])
     const [produtoSelecionado, setProdutoSelecionado] = useState({})
     const history = useHistory();
+    const [noCarrinho, setNocarrinho] = useState(false);
+   
 
     async function carregarProdutos() {
         const resposta = await fetch(`http://localhost:8001/${params.id}/produtos`, {
@@ -95,10 +97,11 @@ function Cardapio() {
             isInBag.quantidade = isInBag.quantidade + novoProduto.quantidade;
             setNovosProdutos(newProdutos);
             salvarCarrinho = newProdutos;
+            
             localStorage.setItem('@usuario/carrinho', JSON.stringify(salvarCarrinho));
             return;
         }
-
+        
         salvarCarrinho.push(novoProduto)
         localStorage.setItem('@usuario/carrinho', JSON.stringify(salvarCarrinho));
     }
@@ -184,6 +187,7 @@ function Cardapio() {
                                         dadosRestaurante={restaurante}
                                         open={openProduto} 
                                         noCarrinho={false}
+                                        setNocarrinho={setNocarrinho}
                                         />}
                             </div>
                     </div>

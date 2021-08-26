@@ -2,8 +2,8 @@ const knex = require('../../conexao');
 
 const adicionarPedido = async (req, res) => {
     const { produtos, endereco, subtotal, entrega } = req.body;
-    const { id } = req.cliente;
-    console.log(req.body)
+    const { id, nome } = req.cliente;
+
     if (!produtos) {
         return res.status(404).json('Adicione pelo menos 1 produto ao pedido.');
     }
@@ -13,6 +13,7 @@ const adicionarPedido = async (req, res) => {
         const inserindoPedido = await knex('pedido').insert({
             cliente_id: id,
             restaurante_id: produtos[0].restaurante_id,
+            nome_cliente: nome,
             cep: endereco.cep,
             endereco: endereco.endereco,
             complemento: endereco.complemento,

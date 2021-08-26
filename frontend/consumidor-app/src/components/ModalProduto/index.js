@@ -6,7 +6,7 @@ import mais from '../../assets/mais.svg';
 import menos from '../../assets/menos.svg';
 import semImagem from '../../assets/semImagem.png';
 
-function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, noCarrinho}) {
+function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, noCarrinho, setNoCarrinho}) {
     const [contador, setContador] = useState(0);
     
     function handleContador(soma) {
@@ -29,7 +29,9 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, no
             {open && 
             <div className="modal">
                 <div className="modal-produto">
-                    <img className="close-button"  onClick={() => setOpen(false)} src={mais}/>
+                    <img className="close-button"  onClick={() => {
+                        setNoCarrinho(false)
+                        setOpen(false)}} src={mais}/>
                     <img className="img-modal" src={dadosProduto.imagem_produto ? dadosProduto.imagem_produto : semImagem} />
                     <img className='imagem-produtos img-absolute' 
                     src={dadosRestaurante.imagem_restaurante} />
@@ -53,10 +55,12 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, no
                                         <p >{contador}</p>
                                         <button className="btn-orange-right" onClick={() => handleContador(1)}><img src={mais} /></button>
                                     </div>
-                                    <button className="btn-orange mb-lg" onClick={() => sacola(dadosPedido)}>Adicionar produto ao carrinho</button>
+                                    <button className="btn-orange mb-lg" onClick={() => {
+                                        sacola(dadosPedido)
+                                        setNoCarrinho(true)}}>Adicionar produto ao carrinho</button>
                                 </div>) 
                                 :
-                                (<div></div>)
+                                (<div>oi</div>)
                             }
                         </div>
                     </div>

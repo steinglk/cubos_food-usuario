@@ -138,7 +138,14 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                             <img src={Carrinho} className='margem-carrinho' />
                             <h1>{nomeRestaurante}</h1>
                         </div>
-                        {endereco ? 
+                        
+                        <div> 
+                        
+                            {!comprado ? 
+                            (<div>
+                                <div>
+                                <div className='enderecoModal'>
+                                        {endereco ? 
                                 (<div>
                                     <span className='span-endereco'>Endereço de Entrega: </span>
                                     <span className='span-endereco2'> {endereco.endereco}, {endereco.complemento}, {endereco.cep}.
@@ -149,74 +156,66 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                                     <ModalEndereco open={open} setOpen={setOpen}/>
                                 </div>)
                             }
-                        <div> 
-                        
-                            {!comprado ? 
-                            (
-                                <div>
-                                        <div className='enderecoModal'>
-                                        
                             </div>
+                                    {novosProdutos.length && !vazio ?  
+                                        (
+                                        <div>
+                                            <div className='tempoEntregaModal'>
+                                        <span>Tempo de Entrega: </span>
+                                        <span className='span-tempo'>{novosProdutos[0].tempoEntrega} minutos.</span>
+                                        </div>
+                                    {novosProdutos.map(produto => (
+                                        <div>
+                                            <div className='produto-modal flex-row'>
+                                                <div className='imagem-produto ' onClick={()=> {setProdutoSelecionado(produto)
+                                                setOpenProduto(true)}}>
+                                                    <img src={produto.imagem_produto ? produto.imagem_produto : semImagem} className='imagem-carrinho'/>
+                                                </div>
+                                                <div className='infor-produtos flex-column space-around'>
+                                                    <span className='infor-nome'>{produto.nome_produto}</span>
+                                                    <span>{produto.quantidade} unidade(s)</span>
+                                                    <span className='infor-valor'>R$ {produto.valor_produto/100}</span>
+                                                </div>
+                                            
+                                                <div className="flex-row content-center items-center  margem-esquerda">
+                                                    <button className="btn-orange-left btn-orange-carrinho flex-row content-center items-center " onClick={() => handleSub(produto)}><img src={menos} /></button>
+                                                    <button className="btn-orange-right btn-orange-carrinho flex-row content-center items-center " onClick={() => handleAdd(produto)}><img src={mais} /></button>
+                                                    <div className='btn-deletar-margem'>
+                                                        <button className="btn-orange-right btn-orange-carrinho flex-row content-center items-center btn-deletar" onClick={() => handleDelete(produto)}><img className='imagem-deletar' src={deletar} /></button>
+                                                    </div>
+                                                </div>
+                                            
+                                                {produtoSelecionado && <ModalProduto 
+                                                setOpen={setProdutoSelecionado}
+                                                dadosProduto={produtoSelecionado} 
+                                                dadosRestaurante={restaurante}
+                                                open={openProduto} 
+                                                noCarrinho={true}/>}
+                                            </div>
+                                        </div>
+                                        ))}
 
-                            <div>
-                                {novosProdutos.length && !vazio ?  
-                                    (<div>
-                                        <div className='tempoEntregaModal'>
-                                    <span>Tempo de Entrega: </span>
-                                    <span className='span-tempo'>{novosProdutos[0].tempoEntrega} minutos.</span>
-                                    </div>
-                                {novosProdutos.map(produto => (
-                                    <div>
-                                        <div className='produto-modal flex-row'>
-                                            <div className='imagem-produto ' onClick={()=> {setProdutoSelecionado(produto)
-                                            setOpenProduto(true)}}>
-                                                <img src={produto.imagem_produto ? produto.imagem_produto : semImagem} className='imagem-carrinho'/>
+                                        <div className='maisProdutos'>
+                                                <span onClick={() => setOpenCarrinho(false)}>Adicionar mais itens ao pedido</span>
                                             </div>
-                                            <div className='infor-produtos flex-column space-around'>
-                                                <span className='infor-nome'>{produto.nome_produto}</span>
-                                                <span>{produto.quantidade} unidade(s)</span>
-                                                <span className='infor-valor'>R$ {produto.valor_produto/100}</span>
-                                            </div>
-                                        
-                                            <div className="flex-row content-center items-center  margem-esquerda">
-                                                <button className="btn-orange-left btn-orange-carrinho flex-row content-center items-center " onClick={() => handleSub(produto)}><img src={menos} /></button>
-                                                <button className="btn-orange-right btn-orange-carrinho flex-row content-center items-center " onClick={() => handleAdd(produto)}><img src={mais} /></button>
-                                                <div className='btn-deletar-margem'>
-                                                    <button className="btn-orange-right btn-orange-carrinho flex-row content-center items-center btn-deletar" onClick={() => handleDelete(produto)}><img className='imagem-deletar' src={deletar} /></button>
+                                            <div className='rodapeModal'>
+                                                <div className='subTotal marginRodape flex-row space-between'>
+                                                    <span>Subtotal</span>
+                                                    <span className='rodapeWeight fontRodape'>R$ {preco/100}</span>
+                                                </div>
+                                                <div className='taxa marginRodape flex-row space-between'>
+                                                    <span>Taxa de entrega</span>
+                                                    <span className='rodapeWeight fontRodape'>R$ {novosProdutos[0].restaurante_taxa/100}</span>
+                                                </div>
+                                                <div className='total marginRodape flex-row space-between'>
+                                                    <span>Total</span>
+                                                    <span className='rodapeWeight fontValor'>R$ {(preco+parseInt(novosProdutos[0].restaurante_taxa))/100}</span>
                                                 </div>
                                             </div>
-                                        
-                                            {produtoSelecionado && <ModalProduto 
-                                            setOpen={setProdutoSelecionado}
-                                            dadosProduto={produtoSelecionado} 
-                                            dadosRestaurante={restaurante}
-                                            open={openProduto} 
-                                            noCarrinho={true}/>}
-                                        </div>
-                                    </div>
-                                    ))}
-
-                                    <div className='maisProdutos'>
-                                            <span onClick={() => setOpenCarrinho(false)}>Adicionar mais itens ao pedido</span>
-                                        </div>
-                                        <div className='rodapeModal'>
-                                            <div className='subTotal marginRodape flex-row space-between'>
-                                                <span>Subtotal</span>
-                                                <span className='rodapeWeight fontRodape'>R$ {preco/100}</span>
+                                            <div className='flex-row space-around'>
+                                                <button className='btn-orange' onClick={realizarCompra}>Confirmar Pedido</button>
                                             </div>
-                                            <div className='taxa marginRodape flex-row space-between'>
-                                                <span>Taxa de entrega</span>
-                                                <span className='rodapeWeight fontRodape'>R$ {novosProdutos[0].restaurante_taxa/100}</span>
-                                            </div>
-                                            <div className='total marginRodape flex-row space-between'>
-                                                <span>Total</span>
-                                                <span className='rodapeWeight fontValor'>R$ {(preco+parseInt(novosProdutos[0].restaurante_taxa))/100}</span>
-                                            </div>
-                                        </div>
-                                        <div className='flex-row space-around'>
-                                            <button className='btn-orange' onClick={realizarCompra}>Confirmar Pedido</button>
-                                        </div>
-                                            </div>) 
+                                                </div>) 
                                             : 
                                         (<div className='semProduto flex-column items-center content-center'>
                                             
