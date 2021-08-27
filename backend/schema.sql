@@ -45,7 +45,9 @@ CREATE TABLE IF NOT EXISTS pedido(
   FOREIGN KEY (restaurante_id) REFERENCES restaurante (id),
 );
 
+-- Alterando tabela de itens
 ALTER TABLE itens ADD COLUMN imagem_produto text;
+ALTER TABLE itens ADD COLUMN nome_produto text;
 
 
 
