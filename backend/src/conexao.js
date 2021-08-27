@@ -3,7 +3,7 @@ const knex = require('knex')({
     connection: {
         host: 'localhost',
         user: 'postgres',
-        password: '123456',
+        password: 'postgres',
         database: 'app_food',
         port: 5432
     }

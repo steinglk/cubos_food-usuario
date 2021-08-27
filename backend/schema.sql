@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS itens(
 CREATE TABLE IF NOT EXISTS pedido(
   id SERIAL PRIMARY KEY NOT NULL,
   cliente_id INT NOT NULL,
+  nome_cliente VARCHAR(100) NOT NULL,
   restaurante_id INT NOT NULL,
   endereco VARCHAR(100) NOT NULL,
   cep VARCHAR(100) NOT NULL,
@@ -39,11 +40,12 @@ CREATE TABLE IF NOT EXISTS pedido(
   subtotal TEXT NOT NULL,
   total TEXT NOT NULL, 
   entrega TEXT NOT NULL,
+  entregue BOOLEAN,
   FOREIGN KEY (cliente_id) REFERENCES cliente (id),
   FOREIGN KEY (restaurante_id) REFERENCES restaurante (id),
-  FOREIGN KEY (itens_id) REFERENCES itens (id)
 );
 
+ALTER TABLE itens ADD COLUMN imagem_produto text;
 
 
 
