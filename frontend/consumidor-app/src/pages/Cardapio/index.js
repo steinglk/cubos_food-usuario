@@ -23,8 +23,12 @@ function Cardapio() {
     const [novosProdutos, setNovosProdutos] = useState([])
     const [produtoSelecionado, setProdutoSelecionado] = useState({})
     const history = useHistory();
-    const [noCarrinho, setNocarrinho] = useState(false);
-   
+    const [addCarrinho, setNocarrinho] = useState(false);
+
+    function produtosCarrinho() {
+        console.log('abrir carrinho')
+        setAbrirCarrinho(true)
+    }
 
     async function carregarProdutos() {
         const resposta = await fetch(`http://localhost:8001/${params.id}/produtos`, {
@@ -89,6 +93,8 @@ function Cardapio() {
             toast.error('Adicione alguma quantidade do produto.', toastConfig);
             return
         }
+        
+        setNocarrinho(true);
 
         const newProdutos = [... salvarCarrinho];
         const isInBag = newProdutos.find(p => p.id === novoProduto.id);
@@ -155,7 +161,8 @@ function Cardapio() {
                                     <div> 
                                     
                                     <div onClick={()=> {setProdutoSelecionado(produto)
-                                    setOpenProduto(true)}
+                                    setOpenProduto(true)
+                                    setNocarrinho(false)}
                                     }  className="div-card">
                                     
                                     <div className="card-content flex-row">
@@ -186,8 +193,9 @@ function Cardapio() {
                                         dadosProduto={produtoSelecionado} 
                                         dadosRestaurante={restaurante}
                                         open={openProduto} 
-                                        noCarrinho={false}
+                                        addCarrinho={addCarrinho}
                                         setNocarrinho={setNocarrinho}
+                                        abrirCarrinho={produtosCarrinho}
                                         />}
                             </div>
                     </div>
