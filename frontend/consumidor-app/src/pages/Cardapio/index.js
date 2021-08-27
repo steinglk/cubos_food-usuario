@@ -12,6 +12,7 @@ import {toast} from 'react-toastify';
 import toastConfig from '../../tools/toastConfig';
 import semImagem from '../../assets/semImagem.png';
 import { useHistory } from 'react-router';
+import perfilPadrao from '../../assets/sem-imagem-avatar.png'
 
 function Cardapio() {
     const [restaurante, setRestaurante] = useState({});
@@ -129,7 +130,7 @@ function Cardapio() {
             </div>
             <div className='conteiner-perfil'>
                 <img className='imagem-perfil img-absolute' 
-                src={restaurante.imagem_restaurante} />
+                src={restaurante.imagem_restaurante ? restaurante.imagem_restaurante : perfilPadrao} />
             </div>
             <div className='flex-row revisar'>
                 <button className='btn-orange' onClick={() => setAbrirCarrinho(true)}>Revisar pedido</button>
