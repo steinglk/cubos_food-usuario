@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS pedido(
   subtotal TEXT NOT NULL,
   total TEXT NOT NULL, 
   entrega TEXT NOT NULL,
-  entregue BOOLEAN,
+  enviado BOOLEAN DEFAULT false,
   FOREIGN KEY (cliente_id) REFERENCES cliente (id),
   FOREIGN KEY (restaurante_id) REFERENCES restaurante (id),
 );
@@ -49,6 +49,8 @@ CREATE TABLE IF NOT EXISTS pedido(
 ALTER TABLE itens ADD COLUMN imagem_produto text;
 ALTER TABLE itens ADD COLUMN nome_produto text;
 
+-- Adicionando o booleano de envio de produtos
+ALTER TABLE pedido ADD COLUMN enviado BOOLEAN DEFAULT false;
 
 
 
