@@ -6,6 +6,7 @@ import mais from '../../assets/mais.svg';
 import menos from '../../assets/menos.svg';
 import semImagem from '../../assets/semImagem.png';
 import carrinho from '../../assets/carrinho.svg';
+import perfilPadrao from '../../assets/sem-imagem-avatar.png' 
 
 function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, addCarrinho, abrirCarrinho, noCarrinho}) {
     const [contador, setContador] = useState(0);
@@ -32,7 +33,7 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, ad
                     <img className="close-button"  onClick={() => setOpen(false)} src={mais}/>
                     <img className="img-modal" src={dadosProduto.imagem_produto ? dadosProduto.imagem_produto : semImagem} />
                     <img className='imagem-produtos img-absolute' 
-                    src={dadosRestaurante.imagem_restaurante} />
+                    src={dadosRestaurante.imagem_restaurante ? dadosRestaurante.imagem_restaurante : perfilPadrao} />
                     <div className="flex-column area-dados space-around">
                         
                         <div>
@@ -41,13 +42,13 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, ad
                                     <h1>{dadosProduto.nome ? dadosProduto.nome : dadosProduto.nome_produto}</h1>
                                     <div className="flex-row space-around mx-lg">
                                         <img src={moneyicon} />
-                                        <p className="bold">Pedido Mínimo: R$ <span className="normal-weight">{dadosRestaurante.valor_minimo_pedido/100}</span></p>
+                                        <p className="bold">Pedido Mínimo: R$ <span className="normal-weight">{(dadosRestaurante.valor_minimo_pedido/100).toFixed(2)}</span></p>
                                         <img src={tempoicon} />
                                         <p className="bold" >Tempo de entrega: <span className="normal-weight">{dadosRestaurante.taxa_entrega} minutos</span></p>
                                     </div>
                                     <div className="flex-row space-around mx-lg my-lg">
                                         <p>{dadosProduto.descricao}</p>
-                                        <span className='span-valor'> R$ {dadosProduto.preco ? dadosProduto.preco/100 : dadosProduto.valor_produto/100}</span> 
+                                        <span className='span-valor'> R$ {dadosProduto.preco ? (dadosProduto.preco/100).toFixed(2) : (dadosProduto.valor_produto/100).toFixed(2)}</span> 
                                     </div>
                                     <div>
                                         {!noCarrinho ? 

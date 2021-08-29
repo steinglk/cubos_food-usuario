@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import {toast} from 'react-toastify';
 import toastConfig from '../../tools/toastConfig';
 
+
 function ModalEndereco ({open, setOpen}) {
     const {register, handleSubmit} = useForm();
     const [estadoEndereco, setEstadoEndereco] = useState('cadastro');

@@ -9,6 +9,8 @@ import mais from '../../assets/mais.svg';
 import menos from '../../assets/menos.svg';
 import deletar from '../../assets/delete.png';
 import confirmado from '../../assets/confirmado.svg';
+import { toast } from 'react-toastify';
+import toastConfig from '../../tools/toastConfig';
 
 function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeRestaurante, restaurante, setNovosProdutos, sacola}){
     const [preco, setPreco] = useState(0);
@@ -82,7 +84,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
         setEndereco(retorno);
     }
 
-    function resetarCarrinho(params) {
+    function resetarCarrinho() {
         setComprado(false);
         setOpenCarrinho(false);
     }
@@ -104,6 +106,12 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
             endereco: endereco,
             entrega: novosProdutos[0].restaurante_taxa
         }
+
+        if((preco+parseInt(novosProdutos[0].restaurante_taxa)) < pedido.produtos[0].valorMinimo){
+            toast.error("Valor de compra abaixo do mínimo aceito", toastConfig)
+            return
+        } 
+
         const resposta = await fetch(`http://localhost:8001/pedidos`, {
             method: 'POST',
             body: JSON.stringify(pedido),
@@ -174,7 +182,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                                                 <div className='infor-produtos flex-column space-around'>
                                                     <span className='infor-nome'>{produto.nome_produto}</span>
                                                     <span>{produto.quantidade} unidade(s)</span>
-                                                    <span className='infor-valor'>R$ {produto.valor_produto/100}</span>
+                                                    <span className='infor-valor'>R$ {(produto.valor_produto/100).toFixed(2)}</span>
                                                 </div>
                                             
                                                 <div className="flex-row content-center items-center  margem-esquerda">
@@ -201,15 +209,15 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                                             <div className='rodapeModal'>
                                                 <div className='subTotal marginRodape flex-row space-between'>
                                                     <span>Subtotal</span>
-                                                    <span className='rodapeWeight fontRodape'>R$ {preco/100}</span>
+                                                    <span className='rodapeWeight fontRodape'>R$ {(preco/100).toFixed(2)}</span>
                                                 </div>
                                                 <div className='taxa marginRodape flex-row space-between'>
                                                     <span>Taxa de entrega</span>
-                                                    <span className='rodapeWeight fontRodape'>R$ {novosProdutos[0].restaurante_taxa/100}</span>
+                                                    <span className='rodapeWeight fontRodape'>R$ {(novosProdutos[0].restaurante_taxa/100).toFixed(2)}</span>
                                                 </div>
                                                 <div className='total marginRodape flex-row space-between'>
                                                     <span>Total</span>
-                                                    <span className='rodapeWeight fontValor'>R$ {(preco+parseInt(novosProdutos[0].restaurante_taxa))/100}</span>
+                                                    <span className='rodapeWeight fontValor'>R$ {((preco+parseInt(novosProdutos[0].restaurante_taxa))/100).toFixed(2)}</span>
                                                 </div>
                                             </div>
                                             <div className='flex-row space-around'>
