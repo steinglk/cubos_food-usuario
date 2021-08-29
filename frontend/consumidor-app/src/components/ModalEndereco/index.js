@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import {toast} from 'react-toastify';
 import toastConfig from '../../tools/toastConfig';
 
-function ModalEndereco ({open, setOpen}) {
+function ModalEndereco ({attEndereco, open, setOpen}) {
     const {register, handleSubmit} = useForm();
     const [estadoEndereco, setEstadoEndereco] = useState('cadastro');
 
@@ -33,6 +33,7 @@ function ModalEndereco ({open, setOpen}) {
         if(retorno === 'Endereço adicionado com sucesso') {
             toast.success('Endereço adicionado com sucesso', toastConfig);
             setEstadoEndereco('sucesso');
+            attEndereco();
             return
         }
         toast.error(retorno, toastConfig);

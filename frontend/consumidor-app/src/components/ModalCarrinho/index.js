@@ -153,7 +153,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
                                 </div>) :
                                 (<div className='adicionar-endereco'> 
                                     <button className='botao-endereco' onClick = {() => setOpen(true)}>Adicionar endereço</button>
-                                    <ModalEndereco open={open} setOpen={setOpen}/>
+                                    <ModalEndereco attEndereco={handleEndereco} open={open} setOpen={setOpen}/>
                                 </div>)
                             }
                             </div>

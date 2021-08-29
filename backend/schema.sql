@@ -38,7 +38,6 @@ CREATE TABLE IF NOT EXISTS pedido(
 CREATE TABLE IF NOT EXISTS itens(
   id SERIAL PRIMARY KEY NOT NULL,
   pedido_id INT NOT NULL,
-  produto_id INT NOT NULL,
   quantidade INT NOT NULL,
   preco_produto INT NOT NULL, 
   FOREIGN KEY (produto_id) REFERENCES produto (id),

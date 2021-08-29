@@ -29,7 +29,6 @@ const adicionarPedido = async (req, res) => {
 
         for (produto of produtos) {
             const inserindoProdutos = await knex('itens').insert({
-                produto_id: produto.id,
                 pedido_id: inserindoPedido[0].id,
                 quantidade: produto.quantidade,
                 preco_produto: produto.valor_produto,

@@ -125,7 +125,7 @@ function Cardapio() {
     return (
         <div>
             <div className='flex-row background-produtos container-background' style={{backgroundImage: `url(${restaurante.categoria})`}}>
-                <h2>{restaurante.nome}</h2>
+                <h2 className="nome-restaurante">{restaurante.nome}</h2>
                 <p onClick={() => handleLogout()} >Logout</p>
             </div>
             <div className='conteiner-perfil'>

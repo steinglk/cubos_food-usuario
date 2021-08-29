@@ -168,3 +168,10 @@ linear-gradient(0deg, #FFFFFF, #FFFFFF);
     position: absolute;
     left: 7rem;
 }
+
+.nome-restaurante {
+    font-family: 'Baloo 2';
+    font-size: 40px;
+    text-shadow: 2px 2px 2px #26100A;
+    margin: 0;
+}
