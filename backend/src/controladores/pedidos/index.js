@@ -35,7 +35,7 @@ const adicionarPedido = async (req, res) => {
                 imagem_produto: produto.imagem_produto,
                 nome_produto: produto.nome_produto
             });
-            console.log(produto)
+            
 
             if (!inserindoProdutos) {
                 return res.status(404).json('Os itens não foram adicionados ao pedido.');
