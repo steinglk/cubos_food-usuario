@@ -19,16 +19,6 @@ CREATE TABLE IF NOT EXISTS endereco_cliente(
   FOREIGN KEY (cliente_id) REFERENCES cliente (id)
 );
 
-CREATE TABLE IF NOT EXISTS itens(
-  id SERIAL PRIMARY KEY NOT NULL,
-  pedido_id INT NOT NULL,
-  produto_id INT NOT NULL,
-  quantidade INT NOT NULL,
-  preco_produto INT NOT NULL, 
-  FOREIGN KEY (produto_id) REFERENCES produto (id),
-  FOREIGN KEY (pedido_id) REFERENCES pedido (id)
-);
-
 CREATE TABLE IF NOT EXISTS pedido(
   id SERIAL PRIMARY KEY NOT NULL,
   cliente_id INT NOT NULL,
@@ -40,15 +30,29 @@ CREATE TABLE IF NOT EXISTS pedido(
   subtotal TEXT NOT NULL,
   total TEXT NOT NULL, 
   entrega TEXT NOT NULL,
-  entregue BOOLEAN,
+  enviado BOOLEAN DEFAULT false,
   FOREIGN KEY (cliente_id) REFERENCES cliente (id),
   FOREIGN KEY (restaurante_id) REFERENCES restaurante (id),
 );
+
+CREATE TABLE IF NOT EXISTS itens(
+  id SERIAL PRIMARY KEY NOT NULL,
+  pedido_id INT NOT NULL,
+  produto_id INT NOT NULL,
+  quantidade INT NOT NULL,
+  preco_produto INT NOT NULL, 
+  FOREIGN KEY (produto_id) REFERENCES produto (id),
+  FOREIGN KEY (pedido_id) REFERENCES pedido (id)
+);
+
+
 
 -- Alterando tabela de itens
 ALTER TABLE itens ADD COLUMN imagem_produto text;
 ALTER TABLE itens ADD COLUMN nome_produto text;
 
+-- Adicionando o booleano de envio de produtos
+ALTER TABLE pedido ADD COLUMN enviado BOOLEAN DEFAULT false;
 
 
 
