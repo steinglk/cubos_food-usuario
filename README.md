@@ -1,6 +1,6 @@
 ![](https://i.imgur.com/xG74tOh.png)
 
-# Aplicação de painel Admin para restaurantes
+# Aplicação para clientes
 
 [Aplicação para restaurantes ](https://github.com/steinglk/desafio-modulo-05)
 
