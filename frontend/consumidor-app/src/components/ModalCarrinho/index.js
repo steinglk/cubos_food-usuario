@@ -126,6 +126,9 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho,
             toast.error(produtos, toastConfig);
             
         }
+        if(produtos === 'Endereço é obrigatório'){
+            toast.error(produtos, toastConfig);
+        }
 
         if(produtos === 'Pedido cadastrado com sucesso!'){
             localStorage.removeItem('@usuario/carrinho');

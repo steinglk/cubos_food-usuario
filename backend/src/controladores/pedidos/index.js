@@ -10,14 +10,9 @@ const adicionarPedido = async (req, res) => {
     if(!endereco) {
         return res.status(400).json('Endereço é obrigatório');
     }
-    for(produto of produtos){
-        if(!produto.ativo){
-            return res.status(400).json('Produto fora de estoque ou desativado');
-        }
-    }
 
     try {
-
+       
         const inserindoPedido = await knex('pedido').insert({
             cliente_id: id,
             restaurante_id: produtos[0].restaurante_id,
@@ -34,7 +29,7 @@ const adicionarPedido = async (req, res) => {
             return res.status(404).json('O pedido não foi adicionado.');
         }
 
-        for (produto of produtos) {
+        for (let produto of produtos) {
             
             const inserindoProdutos = await knex('itens').insert({
                 pedido_id: inserindoPedido[0].id,
