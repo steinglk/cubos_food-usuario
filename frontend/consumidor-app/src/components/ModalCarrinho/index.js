@@ -9,6 +9,8 @@ import mais from '../../assets/mais.svg';
 import menos from '../../assets/menos.svg';
 import deletar from '../../assets/delete.png';
 import confirmado from '../../assets/confirmado.svg';
+import {toast} from 'react-toastify';
+import toastConfig from '../../tools/toastConfig';
 
 function ModalCarrinho({openCarrinho, setOpenCarrinho, 
     novosProdutos,  nomeRestaurante, restaurante, setNovosProdutos, sacola}){
@@ -105,7 +107,10 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho,
             endereco: endereco,
             entrega: novosProdutos[0].restaurante_taxa
         }
-        if(pedido.subtotal+ novosProdutos[0].restaurante_taxa < restaurante.valor_minimo_pedido){}
+        if(pedido.subtotal+ novosProdutos[0].restaurante_taxa < restaurante.valor_minimo_pedido){
+            toast.error('Valor abaixo do pedido mínimo do restaurante', toastConfig);
+            return
+        }
         const resposta = await fetch(`http://localhost:8001/pedidos`, {
             method: 'POST',
             body: JSON.stringify(pedido),
