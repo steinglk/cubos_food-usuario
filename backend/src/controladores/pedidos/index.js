@@ -9,6 +9,16 @@ const adicionarPedido = async (req, res) => {
     }
 
     try {
+            produtos.forEach( async produto => {
+            const {id} = produto
+
+            const validarProduto = await knex("produto").where('id', produto.id).andWhere("ativo", false);
+            
+            if(validarProduto.length){
+                console.log(validarProduto)
+                return res.status(400).json(`Produto ${validarProduto[0].nome} desativado`);
+            }
+        });
 
         const inserindoPedido = await knex('pedido').insert({
             cliente_id: id,
@@ -25,6 +35,8 @@ const adicionarPedido = async (req, res) => {
         if (!inserindoPedido) {
             return res.status(404).json('O pedido não foi adicionado.');
         }
+
+
 
         for (produto of produtos) {
             const inserindoProdutos = await knex('itens').insert({

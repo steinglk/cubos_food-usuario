@@ -121,8 +121,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho,
         });
 
         const produtos = await resposta.json();
-        console.log(produtos);
-
+        
         if(produtos === 'Pedido cadastrado com sucesso!'){
             localStorage.removeItem('@usuario/carrinho');
             setComprado(true);
@@ -130,6 +129,10 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho,
                 deletado: true
             });
             setNovosProdutos([]);
+            return
+        } else {
+            toast.error(produtos, toastConfig);
+            return
         }
     }
     
