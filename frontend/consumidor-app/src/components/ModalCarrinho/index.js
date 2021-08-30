@@ -10,7 +10,8 @@ import menos from '../../assets/menos.svg';
 import deletar from '../../assets/delete.png';
 import confirmado from '../../assets/confirmado.svg';
 
-function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeRestaurante, restaurante, setNovosProdutos, sacola}){
+function ModalCarrinho({openCarrinho, setOpenCarrinho, 
+    novosProdutos,  nomeRestaurante, restaurante, setNovosProdutos, sacola}){
     const [preco, setPreco] = useState(0);
     const [endereco, setEndereco] = useState('');
     const [open, setOpen] = useState(false);
@@ -104,6 +105,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho, novosProdutos,  nomeResta
             endereco: endereco,
             entrega: novosProdutos[0].restaurante_taxa
         }
+        if(pedido.subtotal+ novosProdutos[0].restaurante_taxa < restaurante.valor_minimo_pedido){}
         const resposta = await fetch(`http://localhost:8001/pedidos`, {
             method: 'POST',
             body: JSON.stringify(pedido),

@@ -41,13 +41,13 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, ad
                                     <h1>{dadosProduto.nome ? dadosProduto.nome : dadosProduto.nome_produto}</h1>
                                     <div className="flex-row space-around mx-lg">
                                         <img src={moneyicon} />
-                                        <p className="bold">Pedido Mínimo: R$ <span className="normal-weight">{dadosRestaurante.valor_minimo_pedido/100}</span></p>
+                                        <p className="bold">Pedido Mínimo: R$ <span className="normal-weight">{(dadosRestaurante.valor_minimo_pedido/100).toFixed(2)}</span></p>
                                         <img src={tempoicon} />
-                                        <p className="bold" >Tempo de entrega: <span className="normal-weight">{dadosRestaurante.taxa_entrega} minutos</span></p>
+                                        <p className="bold" >Tempo de entrega: <span className="normal-weight">{(dadosRestaurante.tempo_entrega_minutos)} minutos</span></p>
                                     </div>
                                     <div className="flex-row space-around mx-lg my-lg">
                                         <p>{dadosProduto.descricao}</p>
-                                        <span className='span-valor'> R$ {dadosProduto.preco ? dadosProduto.preco/100 : dadosProduto.valor_produto/100}</span> 
+                                        <span className='span-valor'> R$ {dadosProduto.preco ? (dadosProduto.preco/100).toFixed(2) : (dadosProduto.valor_produto/100).toFixed(2)}</span> 
                                     </div>
                                     <div>
                                         {!noCarrinho ? 
