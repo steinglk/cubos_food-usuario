@@ -1,0 +1,177 @@
+body{
+    overflow: auto;
+}
+
+.container-background{
+    justify-content: space-around;
+    align-items: flex-end;
+    color: white;
+    box-sizing: border-box;
+    background-image: url(../../assets/bg-restaurante.svg);
+}
+
+.container-background p{
+    cursor: pointer;
+    color:rgba(255, 255, 255, 1);
+}
+
+.conteiner-perfil{
+    position: absolute;
+}
+
+.imagem-perfil{
+    border-radius: 50%;
+    position: relative;
+    border: 6px solid #FFFFFF;
+    position: relative;
+    bottom: 85px;
+    background-position: center;
+    background-size: cover;
+    max-width: 180px;
+    min-width: 180px;
+    max-height: 180px;
+    min-height: 180px;
+}
+
+.conteiner-corpo{
+    height: 80vh;
+    color: rgba(82, 84, 89, 1);
+}
+
+.conteiner-corpo p{
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.container-button-has-item{
+    position: absolute;
+}
+
+.button-has-item{
+    position: relative;
+    left: 60vw;
+}
+
+.container-itens{
+    display: grid;
+    gap: 40px 32px;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    padding: 112px;
+    max-height: min-content;
+    overflow-y: auto;
+}
+
+.container-card{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 6px rgba(50, 50, 50, 0.24);
+    border-radius: 24px;
+    padding: 10px 32px 20px 32px;
+    height: auto;
+    overflow-y: auto;
+    justify-content: space-around;
+
+}
+
+.texto-card{
+    display: flex;
+    width: 60%;
+    text-align: justify;
+    margin: 0 20px 8% 0;
+    justify-content: space-between;
+}
+
+.imagem-card{
+    border: 2px solid rgba(251, 59, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 16px;
+    max-width: 180px;
+    min-width: 180px;
+    max-height: 180px;
+    min-height: 180px;
+    
+}
+
+.div-imagem-card{
+    margin-right: 10%;
+    margin-top: 4%;
+}
+
+.estilo-p{
+    color: rgba(34, 34, 34, 0,87);
+    font-size: 16px;
+}
+
+.estilo-span{
+    color: rgba(0, 99, 53, 1);
+    background: linear-gradient(0deg, rgba(13, 138, 79, 0.1), rgba(13, 138, 79, 0.1)),
+linear-gradient(0deg, #FFFFFF, #FFFFFF);
+    font-size: 14px;
+}
+
+.div-card {
+    width: 41vw;
+    height: 238px;
+    margin: 10px 32px 20px 32px;;
+    box-shadow: 0px 4px 6px rgba(50, 50, 50, 0.24);
+    border-radius: 24px;
+    background: #FFFFFF;
+}
+
+.card-content {
+    height: 100%;
+    width: 100%;
+    padding: 10px 32px 20px 32px;
+    border-radius: 24px;
+}
+
+.h1-vazio {
+    position: absolute;
+    right: 40%;
+   color: #525459;
+   font-family: Montserrat;
+}
+
+.revisar{
+    justify-content: flex-end;
+    margin-right: 20%;
+}
+
+.infor-margem{
+    margin-top: 5%;
+}
+
+.infor-p{
+    font-weight: 600;
+    color: rgba(82, 84, 89, 1);
+    margin-left: 3%;
+}
+
+.semProduto{
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0,05);
+    background: #F9F9F9;
+    border-radius: 20px;
+    margin: 7%;
+    color: #525459;
+    font-weight: 600;
+}
+
+.margem-interna{
+    margin: 10%;
+}
+
+.distancia{
+    margin-bottom: 20%;
+}
+
+.voltar {
+    position: absolute;
+    right: 20%;
+}
+
+.nome-restaurante {
+    font-family: 'Baloo 2';
+    font-size: 40px;
+    text-shadow: 2px 2px 2px #26100A;
+    margin: 0;
+}

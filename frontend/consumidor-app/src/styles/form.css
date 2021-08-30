@@ -13,12 +13,12 @@
     justify-content: center;
     background-color: white;
     padding: 45px 61px;  
-    width: 50%;
+    width: 40%;
     border-bottom-right-radius: 15%;
     position: relative; 
 }
 
-.form{
+.form-class{
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -27,42 +27,6 @@
     padding: 64px 40px;
     position: relative;
     left: 300px;
-}
-
-label{
-    font-size: 16px;
-    margin-left: 10px;
-    font-weight: 600;
-    color: #393C40;
-    margin-bottom: 5px;
-    font-style: normal;
-    line-height: 20px;
-    letter-spacing: 0em;
-    text-align: left;
-}
-
-span{
-    color: rgba(111, 115, 119, 1);
-}
-
-h1{
-    font-size: 32px;
-    color: #D13201;
-}
-
-input{
-    margin-bottom: 24px;
-    font-size: 16px;
-    font-weight: 400;
-    margin-bottom: 30px; 
-}
-
-a{
-    font-size: 12px;
-}
-
-button{
-    margin-bottom: 48px;
 }
 
 .container-form-cadastro{

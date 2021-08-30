@@ -16,9 +16,17 @@
 }
 
 .space-between{
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .space-around{
     justify-content: space-around;
+}
+
+.flex-end{
+    justify-content: flex-end;
+}
+
+.content-between{
+    align-content: space-between;
 }

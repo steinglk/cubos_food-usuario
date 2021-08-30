@@ -45,3 +45,52 @@
 .text-btn-anterior{
     color: #D13201;
 }
+
+.btn-orange-left{
+    background-color: #D13201;
+    border-radius: 5px 0 0 5px;
+    width: 40px;
+    height: 40px;
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-right: 45px;
+}
+
+.btn-orange-right{
+    background-color: #D13201;
+    border-radius: 0px 5px 5px 0px;
+    width: 40px;
+    height: 40px;
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-left: 45px;
+}
+
+.btn-orange-carrinho{
+    margin-left: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    
+}
+
+.imagem-deletar{
+    width: 30px;
+    height: 30px;
+}
+
+.btn-deletar{
+    margin-left: 45px;
+}

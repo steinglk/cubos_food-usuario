@@ -1,0 +1,83 @@
+.modal-content-carrinho{
+    overflow: auto;
+}
+
+.modal-content-carrinho {
+    background-color: #ffffff;
+    border-radius: 15px;
+    position: relative;
+    padding: 2rem;
+    width: 40%;
+    height: 78%;
+}
+
+.btn-fechar{
+    background: none;
+    outline: none;
+    border: none;
+    color:  rgba(209, 50, 1, 1);
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.margem-carrinho{
+    margin-right: 1%;
+}
+
+
+
+.span-tempo{
+    font-size: 24px;
+}
+
+.imagem-carrinho{
+    border: 2px solid rgba(251, 59, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 16px;
+    width: 100%;
+}
+
+.input-endereco {
+    margin-bottom: 24px;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 1rem auto 0 auto;
+    width: 50%;
+    height: 30px;
+    border-radius: 10px;
+    border: 2px solid rgba(27, 26, 42, 0.29);
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+.width-endereco {
+    max-width: 245px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.label-endereco {
+    font-size: 16px;
+    margin-left: 10px;
+    font-weight: 600;
+    color: #393C40;
+    margin-bottom: 5px;
+    font-style: normal;
+    line-height: 20px;
+    letter-spacing: 0;
+    padding-left: 9rem;
+}
+
+.h1-endereco {
+    font-family: 'Baloo 2';
+    font-style: normal;
+    font-size: 40px;
+    color: rgba(18, 18, 18, 0.8);
+    margin-left: 2rem;
+}
+
+.sucesso-endereco {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
