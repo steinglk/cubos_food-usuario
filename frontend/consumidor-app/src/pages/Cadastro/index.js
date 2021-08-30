@@ -16,6 +16,7 @@ import toastConfig from '../../tools/toastConfig';
 
 function Cadastro() {
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const {register, handleSubmit} = useForm();
     const history = useHistory();
 
@@ -126,9 +127,9 @@ function Cadastro() {
                             type={showPassword ? 'text' : 'password'} 
                         />
                         <FontAwesomeIcon 
-                            icon={showPassword ? faEye : faEyeSlash} className="eye-password"
+                            icon={showConfirmPassword ? faEye : faEyeSlash} className="eye-password"
                             size="lg"
-                            onClick={() => setShowPassword(!showPassword)}
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                         />
                     </div>
 

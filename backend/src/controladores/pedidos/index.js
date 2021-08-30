@@ -7,6 +7,14 @@ const adicionarPedido = async (req, res) => {
     if (!produtos) {
         return res.status(404).json('Adicione pelo menos 1 produto ao pedido.');
     }
+    if(!endereco) {
+        return res.status(400).json('Endereço é obrigatório');
+    }
+    for(produto of produtos){
+        if(!produto.ativo){
+            return res.status(400).json('Produto fora de estoque ou desativado');
+        }
+    }
 
     try {
 
@@ -27,6 +35,7 @@ const adicionarPedido = async (req, res) => {
         }
 
         for (produto of produtos) {
+            
             const inserindoProdutos = await knex('itens').insert({
                 pedido_id: inserindoPedido[0].id,
                 quantidade: produto.quantidade,
@@ -34,6 +43,7 @@ const adicionarPedido = async (req, res) => {
                 imagem_produto: produto.imagem_produto,
                 nome_produto: produto.nome_produto
             });
+        
 
             if (!inserindoProdutos) {
                 return res.status(404).json('Os itens não foram adicionados ao pedido.');

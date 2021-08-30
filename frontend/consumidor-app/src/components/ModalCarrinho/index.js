@@ -122,6 +122,10 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho,
 
         const produtos = await resposta.json();
         console.log(produtos);
+        if(produtos === 'Produto fora de estoque ou desativado'){
+            toast.error(produtos, toastConfig);
+            
+        }
 
         if(produtos === 'Pedido cadastrado com sucesso!'){
             localStorage.removeItem('@usuario/carrinho');
