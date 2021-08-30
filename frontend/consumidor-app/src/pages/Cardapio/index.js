@@ -85,7 +85,7 @@ function Cardapio() {
             const mesmoRestaurante = verificarRestaurante.find(id => id.restaurante_id === novoProduto.restaurante_id);
 
             if(!mesmoRestaurante){
-                toast.error('Não é possível fazer um pedido em dois restaurantes distintos.', toastConfig);
+                toast.error('Não é possível fazer um pedido em dois restaurantes distintos. Limpe seu carrinho para continuar', toastConfig);
                 return
             }
         }
@@ -141,7 +141,7 @@ function Cardapio() {
                 <div className='flex-row items-center'>
                     <img src={pedidoMinimo}/>
                     <span className='infor-p'>Pedido Mínimo: </span>
-                    <span>R$:{restaurante.valor_minimo_pedido/100}</span>
+                    <span>R$:{(restaurante.valor_minimo_pedido/100).toFixed(2)}</span>
                 </div>
                 <div className='flex-row items-center'>
                     <img src={tempoEntrega}/>
@@ -175,7 +175,7 @@ function Cardapio() {
                                                 <p>{produto.descricao}</p>
                                             </div>
                                             <div>
-                                                <span className='estilo-span'>R$: {produto.preco/100}</span>
+                                                <span className='estilo-span'>R$: {(produto.preco/100).toFixed(2)}</span>
                                             </div>
                                         </div>
                                         <div className='div-imagem-card'>
