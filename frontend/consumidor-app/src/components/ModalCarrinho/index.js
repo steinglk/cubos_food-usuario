@@ -122,6 +122,11 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho,
 
         const produtos = await resposta.json();
         
+        if(produtos === 'Endereço é obrigatório'){
+            toast.error(produtos, toastConfig);
+            return
+        }
+
         if(produtos === 'Pedido cadastrado com sucesso!'){
             localStorage.removeItem('@usuario/carrinho');
             setComprado(true);

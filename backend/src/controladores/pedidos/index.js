@@ -7,6 +7,9 @@ const adicionarPedido = async (req, res) => {
     if (!produtos) {
         return res.status(404).json('Adicione pelo menos 1 produto ao pedido.');
     }
+    if(!endereco) {
+        return res.status(400).json('Endereço é obrigatório');
+    }
 
     try {
             produtos.forEach( async produto => {
@@ -36,9 +39,8 @@ const adicionarPedido = async (req, res) => {
             return res.status(404).json('O pedido não foi adicionado.');
         }
 
-
-
-        for (produto of produtos) {
+        for (let produto of produtos) {
+            
             const inserindoProdutos = await knex('itens').insert({
                 pedido_id: inserindoPedido[0].id,
                 quantidade: produto.quantidade,
@@ -46,6 +48,7 @@ const adicionarPedido = async (req, res) => {
                 imagem_produto: produto.imagem_produto,
                 nome_produto: produto.nome_produto
             });
+        
 
             if (!inserindoProdutos) {
                 return res.status(404).json('Os itens não foram adicionados ao pedido.');
