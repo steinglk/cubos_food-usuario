@@ -98,7 +98,7 @@ function Restaurantes() {
                         {restaurantes.filter(handleFilter).map(restaurante =>(
                                 <div className="div-card" onClick={() => cardapio(restaurante.id)}>
                                 <div className="card-content flex-row">
-                                    <div className='flex-column texto-card'>
+                                    <div className='flex-column texto-card space-between'>
                                         <div>
                                             <h4>{restaurante.nome}</h4>
                                         </div>
@@ -106,7 +106,7 @@ function Restaurantes() {
                                             <p>{restaurante.descricao}</p>
                                         </div>
                                         <div>
-                                            <span className='estilo-span'>$$$</span>
+                                            <span className='estilo-span'>Valor mínimo R$: {(restaurante.valor_minimo_pedido/100).toFixed(2)}</span>
                                         </div>
                                     </div>
                                     <div className='div-imagem-card'>
@@ -120,7 +120,7 @@ function Restaurantes() {
                         } 
                         {restaurantes.filter(handleFilter).length ? ''  : (
                             <div className="h1-vazio"><h1>Nenhum restaurante encontrado</h1></div>
-                            )}
+                        )}
                     </div>
                     </div>
                 </div>   

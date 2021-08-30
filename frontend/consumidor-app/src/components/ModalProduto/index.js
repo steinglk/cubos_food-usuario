@@ -6,6 +6,7 @@ import mais from '../../assets/mais.svg';
 import menos from '../../assets/menos.svg';
 import semImagem from '../../assets/semImagem.png';
 import carrinho from '../../assets/carrinho.svg';
+import perfilPadrao from '../../assets/sem-imagem-avatar.png' 
 
 function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, addCarrinho, abrirCarrinho, noCarrinho}) {
     const [contador, setContador] = useState(0);
@@ -32,7 +33,7 @@ function ModalProduto({dadosProduto, dadosRestaurante, setOpen, sacola, open, ad
                     <img className="close-button"  onClick={() => setOpen(false)} src={mais}/>
                     <img className="img-modal" src={dadosProduto.imagem_produto ? dadosProduto.imagem_produto : semImagem} />
                     <img className='imagem-produtos img-absolute' 
-                    src={dadosRestaurante.imagem_restaurante} />
+                    src={dadosRestaurante.imagem_restaurante ? dadosRestaurante.imagem_restaurante : perfilPadrao} />
                     <div className="flex-column area-dados space-around">
                         
                         <div>

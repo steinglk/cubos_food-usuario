@@ -85,7 +85,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho,
         setEndereco(retorno);
     }
 
-    function resetarCarrinho(params) {
+    function resetarCarrinho() {
         setComprado(false);
         setOpenCarrinho(false);
     }
@@ -181,7 +181,7 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho,
                                                 <div className='infor-produtos flex-column space-around'>
                                                     <span className='infor-nome'>{produto.nome_produto}</span>
                                                     <span>{produto.quantidade} unidade(s)</span>
-                                                    <span className='infor-valor'>R$ {produto.valor_produto/100}</span>
+                                                    <span className='infor-valor'>R$ {(produto.valor_produto/100).toFixed(2)}</span>
                                                 </div>
                                             
                                                 <div className="flex-row content-center items-center  margem-esquerda">
@@ -208,15 +208,15 @@ function ModalCarrinho({openCarrinho, setOpenCarrinho,
                                             <div className='rodapeModal'>
                                                 <div className='subTotal marginRodape flex-row space-between'>
                                                     <span>Subtotal</span>
-                                                    <span className='rodapeWeight fontRodape'>R$ {preco/100}</span>
+                                                    <span className='rodapeWeight fontRodape'>R$ {(preco/100).toFixed(2)}</span>
                                                 </div>
                                                 <div className='taxa marginRodape flex-row space-between'>
                                                     <span>Taxa de entrega</span>
-                                                    <span className='rodapeWeight fontRodape'>R$ {novosProdutos[0].restaurante_taxa/100}</span>
+                                                    <span className='rodapeWeight fontRodape'>R$ {(novosProdutos[0].restaurante_taxa/100).toFixed(2)}</span>
                                                 </div>
                                                 <div className='total marginRodape flex-row space-between'>
                                                     <span>Total</span>
-                                                    <span className='rodapeWeight fontValor'>R$ {(preco+parseInt(novosProdutos[0].restaurante_taxa))/100}</span>
+                                                    <span className='rodapeWeight fontValor'>R$ {((preco+parseInt(novosProdutos[0].restaurante_taxa))/100).toFixed(2)}</span>
                                                 </div>
                                             </div>
                                             <div className='flex-row space-around'>

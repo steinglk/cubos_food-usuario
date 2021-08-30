@@ -75,6 +75,7 @@ function Cardapio() {
         novoProduto.restaurante_nome = restaurante.nome;
         novoProduto.restaurante_taxa = restaurante.taxa_entrega;
         novoProduto.tempoEntrega = restaurante.tempo_entrega_minutos;
+        novoProduto.valorMinimo = restaurante.valor_minimo_pedido;
 
         if(novoProduto.deletado){
             return;
@@ -160,31 +161,30 @@ function Cardapio() {
                             <div className='container-itens'>
                                 {produtos.map(produto =>(
                                     <div> 
-                                    
-                                    <div onClick={()=> {setProdutoSelecionado(produto)
-                                    setOpenProduto(true)
-                                    setNocarrinho(false)}
-                                    }  className="div-card">
-                                    
-                                    <div className="card-content flex-row">
-                                        <div className='flex-column texto-card'>
-                                            <div>
-                                                <h4>{produto.nome}</h4>
+                                        <div onClick={()=> {setProdutoSelecionado(produto)
+                                        setOpenProduto(true)
+                                        setNocarrinho(false)}
+                                        }  className="div-card">
+                                        
+                                        <div className="card-content flex-row">
+                                            <div className='flex-column texto-card space-between'>
+                                                <div>
+                                                    <h4>{produto.nome}</h4>
+                                                </div>
+                                                <div className='estilo-p'>
+                                                    <p>{produto.descricao}</p>
+                                                </div>
+                                                <div>
+                                                    <span className='estilo-span'>R$: {(produto.preco/100).toFixed(2)}</span>
+                                                </div>
                                             </div>
-                                            <div className='estilo-p'>
-                                                <p>{produto.descricao}</p>
-                                            </div>
-                                            <div>
-                                                <span className='estilo-span'>R$: {(produto.preco/100).toFixed(2)}</span>
-                                            </div>
-                                        </div>
-                                        <div className='div-imagem-card'>
-                                            <div > 
-                                                <img src={produto.imagem_produto ? produto.imagem_produto : semImagem} alt="imagem do produto" className='imagem-card' />
+                                            <div className='div-imagem-card'>
+                                                <div > 
+                                                    <img src={produto.imagem_produto ? produto.imagem_produto : semImagem} alt="imagem do produto" className='imagem-card' />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 </div>
                             )) 
                             }
